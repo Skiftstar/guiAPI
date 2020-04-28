@@ -1,5 +1,6 @@
 package Yukami.guiAPI;
 
+import com.sun.istack.internal.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
@@ -28,25 +30,61 @@ public class guiWindow implements Listener {
     private boolean fill = false;
     private JavaPlugin plugin;
     private Material fillMat = null;
+    private WindowType type;
 
-    public guiWindow(Player p, String name, int rows, JavaPlugin plugin) {
+    /**
+     * Creates a Window (an inventory) that can be further customized
+     * @param p Player of that the inv will be opened to
+     * @param name title of the inventory
+     * @param rows Amount of rows, min. 1, max. 6
+     * @param type WindowType, normal or split
+     * @param plugin Plugin reference
+     */
+    public guiWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
         this.p = p;
         this.name = name;
         this.plugin = plugin;
         this.rows = rows;
+        this.type = type;
         if (rows > 6 || rows < 1) {
             rows = 6;
-            Main.getInstance().console.sendMessage(ChatColor.RED + "Can't create a GUI with more than 6 or less than 1 rows! Defaulting to 6 rows!");
         }
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
     }
 
+
+    /**
+     * If the WindowType is set to Split_2 or Split_4, you can change the border material and name
+     * @param mat Material of the border
+     * @param name Name of the Border
+     */
+    public void setBorder(Material mat, String name) {
+        if (!(type.equals(WindowType.SPLIT_2) || type.equals(WindowType.SPLIT_4))) {
+            return;
+        }
+        ItemStack is = new ItemStack(mat);
+        ItemMeta im = is.getItemMeta();
+        im.setDisplayName(Util.Color(name));
+        is.setItemMeta(im);
+
+    }
+
+    /**
+     * adds an ItemStack to the window
+     * @param mat Material of the Item
+     * @param name Name of the Item
+     * @param slot Slot the item is in (does not work if a border item is on that slot)
+     * @return Returns the created <b>guiItem</b>
+     */
     public guiItem addItemStack(Material mat, String name, int slot) {
         guiItem item = new guiItem(this, mat, name, slot);
         clickableItems.put(item.getItemStack(), item);
         return item;
     }
 
+    /**
+     * creates the inventory and adds all items to it
+     */
     public void invSetup() {
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
         for (ItemStack is : clickableItems.keySet()) {
@@ -58,11 +96,18 @@ public class guiWindow implements Listener {
         }
     }
 
+    /**
+     * Set the FillMaterial for all empty slots of the inventory
+     * @param mat Material of the fill
+     */
     public void setFillInv(Material mat) {
         fill = true;
         fillMat = mat;
     }
 
+    /**
+     * opens in the inventory
+     */
     public void open() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         invSetup();
@@ -72,6 +117,10 @@ public class guiWindow implements Listener {
         p.openInventory(inv);
     }
 
+
+    /**
+     * Fills the empty slots of the inventory with the preassigned item
+     */
     public void fillInv() {
         ItemStack is = new ItemStack(fillMat);
         for (int i = 0; i < inv.getSize(); i++) {
@@ -85,10 +134,16 @@ public class guiWindow implements Listener {
         }
     }
 
+    /**
+     * Unregisters the window from the Listeners so that the reference can be dumped
+     */
     public void delete() {
         HandlerList.unregisterAll(this);
     }
 
+    /**
+     * unregisters the window, useful if you want to save on resources if the window has no need to listens to events for some time
+     */
     public void unregister() {
         HandlerList.unregisterAll(this);
     }
@@ -132,6 +187,10 @@ public class guiWindow implements Listener {
         HandlerList.unregisterAll(this);
     }
 
+    /**
+     *
+     * @return the inventory
+     */
     public Inventory getInv() {
         return inv;
     }

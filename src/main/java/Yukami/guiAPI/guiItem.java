@@ -17,6 +17,14 @@ public class guiItem {
     private int slot;
     private Inventory inv;
 
+    /**
+     *
+     * @param window window of the item
+     * @param mat Material of the item
+     * @param name Name of the item
+     * @param amount Amount of items in the ItemStack
+     * @param slot slot the item will be put in
+     */
     public guiItem(guiWindow window, Material mat, String name, int amount, int slot) {
         this.window = window;
         this.inv = window.getInv();
@@ -27,6 +35,9 @@ public class guiItem {
         is.setItemMeta(im);
     }
 
+    /**
+     * Same as other constructor, but without name. Name will be the material name
+     */
     public guiItem(guiWindow window, Material mat, int amount, int slot) {
         this.window = window;
         this.inv = window.getInv();
@@ -35,6 +46,9 @@ public class guiItem {
         ItemMeta im = is.getItemMeta();
     }
 
+    /**
+     * same as other constructor, but without item amount, amount will be 1
+     */
     public guiItem(guiWindow window, Material mat, String name, int slot) {
         this.window = window;
         this.inv = window.getInv();
@@ -45,11 +59,19 @@ public class guiItem {
         is.setItemMeta(im);
     }
 
+    /**
+     * Changes the item slot. Item in old slot will be removed
+     * @param slot slot the item will be put in
+     */
     public void setSlot(int slot) {
         this.slot = slot;
         inv.setItem(slot, is);
     }
 
+    /**
+     * Changes the Item material
+     * @param mat - Material the item should be changed to
+     */
     public void setMaterial(Material mat) {
         window.clickableItems.remove(is);
         is.setType(mat);
@@ -57,6 +79,10 @@ public class guiItem {
         inv.setItem(slot, is);
     }
 
+    /**
+     * Changes the amount of items in the ItemStack
+     * @param count - amount of items in the ItemStack
+     */
     public void setAmount(int count) {
         if (count < 1) {
             count = 1;
@@ -70,6 +96,10 @@ public class guiItem {
         inv.setItem(slot, is);
     }
 
+    /**
+     * Sets a preset Lore
+     * @param lore - StringList with the pre set lore
+     */
     public void updateLore(List<String> lore) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
@@ -79,6 +109,10 @@ public class guiItem {
         window.clickableItems.put(is, this);
     }
 
+    /**
+     * Adds a single line to the Item lore
+     * @param lore - Line to be added
+     */
     public void addLore(String lore) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
@@ -95,6 +129,10 @@ public class guiItem {
         window.clickableItems.put(is, this);
     }
 
+    /**
+     * Removes a specified line from the lore. If the lore has no lines after this, it will be removed completely
+     * @param lore - Line to be removed
+     */
     public void removeLore(String lore) {
         ItemMeta im = is.getItemMeta();
         if (!im.hasLore()) {
@@ -117,6 +155,10 @@ public class guiItem {
         inv.setItem(slot, is);
     }
 
+    /**
+     * Removes the given line number from the item lore
+     * @param line - line number to be removed
+     */
     public void removeLore(int line) {
         ItemMeta im = is.getItemMeta();
         if (!im.hasLore()) {
@@ -141,6 +183,10 @@ public class guiItem {
         inv.setItem(slot, is);
     }
 
+    /**
+     * Updates the item name
+     * @param name - New name of the item
+     */
     public void updateName(String name) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
@@ -150,10 +196,17 @@ public class guiItem {
         window.clickableItems.put(is, this);
     }
 
+    /**
+     * Adds a function that will be executed once the item gets clicked
+     * @param function - A Void,Void function (it's java.lang.Void so it has to return null)
+     */
     public void setOnClick(Function<Void, Void> function) {
         functionClick = function;
     }
 
+    /**
+     * Gets called when the item is clicked
+     */
     public void onClick() {
         if (functionClick == null) {
             return;
@@ -161,10 +214,18 @@ public class guiItem {
         functionClick.apply(null);
     }
 
+    /**
+     *
+     * @return - ItemStack of the item
+     */
     public ItemStack getItemStack() {
         return is;
     }
 
+    /**
+     *
+     * @return - slot the item is in
+     */
     public int getSlot() {
         return slot;
     }
