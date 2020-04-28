@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class guiWindow implements Listener {
 
-    private Map<ItemStack, guiItem> clickableItems = new HashMap<>();
-    private Map<ItemStack, guiItem> borderItems = new HashMap<>();
+    Map<ItemStack, guiItem> clickableItems = new HashMap<>();
+    Map<ItemStack, guiItem> borderItems = new HashMap<>();
     private Inventory inv;
     private Player p;
     private int rows;
