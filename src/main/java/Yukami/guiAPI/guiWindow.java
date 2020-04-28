@@ -85,7 +85,7 @@ public class guiWindow implements Listener {
     /**
      * creates the inventory and adds all items to it
      */
-    public void invSetup() {
+    private void invSetup() {
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
         for (ItemStack is : clickableItems.keySet()) {
             guiItem item = clickableItems.get(is);
@@ -108,7 +108,7 @@ public class guiWindow implements Listener {
     /**
      * opens in the inventory
      */
-    public void open() {
+    void open() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         invSetup();
         if (fill) {
@@ -121,7 +121,7 @@ public class guiWindow implements Listener {
     /**
      * Fills the empty slots of the inventory with the preassigned item
      */
-    public void fillInv() {
+    void fillInv() {
         ItemStack is = new ItemStack(fillMat);
         for (int i = 0; i < inv.getSize(); i++) {
             try {
@@ -149,7 +149,7 @@ public class guiWindow implements Listener {
     }
 
     @EventHandler
-    public void onInvClick(InventoryClickEvent e) {
+    private void onInvClick(InventoryClickEvent e) {
         Inventory clicked = e.getClickedInventory();
         if (clicked == null) {
             return;
@@ -180,7 +180,7 @@ public class guiWindow implements Listener {
     }
 
     @EventHandler
-    public void onInvClose(InventoryCloseEvent e) {
+    private void onInvClose(InventoryCloseEvent e) {
         if (!e.getPlayer().equals(p)) {
             return;
         }

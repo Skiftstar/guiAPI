@@ -25,7 +25,7 @@ public class guiItem {
      * @param amount Amount of items in the ItemStack
      * @param slot slot the item will be put in
      */
-    public guiItem(guiWindow window, Material mat, String name, int amount, int slot) {
+    guiItem(guiWindow window, Material mat, String name, int amount, int slot) {
         this.window = window;
         this.inv = window.getInv();
         this.slot = slot;
@@ -38,7 +38,7 @@ public class guiItem {
     /**
      * Same as other constructor, but without name. Name will be the material name
      */
-    public guiItem(guiWindow window, Material mat, int amount, int slot) {
+    guiItem(guiWindow window, Material mat, int amount, int slot) {
         this.window = window;
         this.inv = window.getInv();
         this.slot = slot;
@@ -49,7 +49,7 @@ public class guiItem {
     /**
      * same as other constructor, but without item amount, amount will be 1
      */
-    public guiItem(guiWindow window, Material mat, String name, int slot) {
+    guiItem(guiWindow window, Material mat, String name, int slot) {
         this.window = window;
         this.inv = window.getInv();
         this.slot = slot;
