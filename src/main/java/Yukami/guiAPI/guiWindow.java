@@ -22,7 +22,8 @@ import java.util.Map;
 
 public class guiWindow implements Listener {
 
-    Map<ItemStack, guiItem> clickableItems = new HashMap<>();
+    private Map<ItemStack, guiItem> clickableItems = new HashMap<>();
+    private Map<ItemStack, guiItem> borderItems = new HashMap<>();
     private Inventory inv;
     private Player p;
     private int rows;
@@ -49,12 +50,20 @@ public class guiWindow implements Listener {
         if (rows > 6 || rows < 1) {
             rows = 6;
         }
+        // Default border
+        if (type.equals(WindowType.SPLIT_2)) {
+            for (int i = 0; i < rows; i++) {
+                guiItem item = new guiItem(this, Material.WHITE_STAINED_GLASS_PANE, 4 + (i * 9));
+                borderItems.put(item.getItemStack(), item);
+            }
+        }
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
     }
 
 
     /**
      * If the WindowType is set to Split_2 or Split_4, you can change the border material and name
+     * If name is null, the item name will be used
      * @param mat Material of the border
      * @param name Name of the Border
      */
@@ -62,11 +71,18 @@ public class guiWindow implements Listener {
         if (!(type.equals(WindowType.SPLIT_2) || type.equals(WindowType.SPLIT_4))) {
             return;
         }
-        ItemStack is = new ItemStack(mat);
-        ItemMeta im = is.getItemMeta();
-        im.setDisplayName(Util.Color(name));
-        is.setItemMeta(im);
-
+        borderItems.clear();
+        if (name == null) {
+            for (int i = 0; i < rows; i++) {
+                guiItem item = new guiItem(this, mat, 4 + (i * 9));
+                borderItems.put(item.getItemStack(), item);
+            }
+        } else {
+            for (int i = 0; i < rows; i++) {
+                guiItem item = new guiItem(this, mat, name, 4 + (i * 9));
+                borderItems.put(item.getItemStack(), item);
+            }
+        }
     }
 
     /**
@@ -89,9 +105,10 @@ public class guiWindow implements Listener {
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
         for (ItemStack is : clickableItems.keySet()) {
             guiItem item = clickableItems.get(is);
-            if (item == null) {
-                System.out.println("is definitiv null");
-            }
+            inv.setItem(item.getSlot(), item.getItemStack());
+        }
+        for (ItemStack is : borderItems.keySet()) {
+            guiItem item = borderItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
         }
     }

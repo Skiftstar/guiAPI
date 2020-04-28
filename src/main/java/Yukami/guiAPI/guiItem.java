@@ -60,6 +60,16 @@ public class guiItem {
     }
 
     /**
+     * same as other constructors, but without name or amount, name will be item name, amount will be 1
+     */
+    guiItem(guiWindow window, Material mat, int slot) {
+        this.window = window;
+        this.inv = window.getInv();
+        this.slot = slot;
+        is = new ItemStack(mat);
+    }
+
+    /**
      * Changes the item slot. Item in old slot will be removed
      * @param slot slot the item will be put in
      */
