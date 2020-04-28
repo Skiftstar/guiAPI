@@ -6,7 +6,9 @@ Author: Yukami
 Last Updated: April 21, 2020
  */
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,9 @@ public class GUI {
     private guiWindow currWindow = null;
     private List<guiWindow> windows = new ArrayList<>();
     private Player p;
-    private Main plugin;
+    private JavaPlugin plugin;
 
-    public GUI(Player p, Main plugin) {
+    public GUI(Player p, JavaPlugin plugin) {
         this.p = p;
         this.plugin = plugin;
     }

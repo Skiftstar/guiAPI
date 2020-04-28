@@ -37,6 +37,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn install -DskipTests" />
+      <command value="mvn source:jar" />
     </option>
   </component>
   <component name="RunDashboard">

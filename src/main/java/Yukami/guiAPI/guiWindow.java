@@ -12,6 +12,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,16 +23,16 @@ public class guiWindow implements Listener {
     Map<ItemStack, guiItem> clickableItems = new HashMap<>();
     private Inventory inv;
     private Player p;
-    private Main plugin;
     private int rows;
     private String name;
     private boolean fill = false;
+    private JavaPlugin plugin;
     private Material fillMat = null;
 
-    public guiWindow(Player p, String name, int rows, Main plugin) {
+    public guiWindow(Player p, String name, int rows, JavaPlugin plugin) {
         this.p = p;
-        this.plugin = plugin;
         this.name = name;
+        this.plugin = plugin;
         this.rows = rows;
         if (rows > 6 || rows < 1) {
             rows = 6;
