@@ -216,7 +216,7 @@ public class guiItem {
 
     /**
      *
-     * @return - ItemStack of the item
+     * @return ItemStack of the item
      */
     public ItemStack getItemStack() {
         return is;
@@ -224,7 +224,7 @@ public class guiItem {
 
     /**
      *
-     * @return - slot the item is in
+     * @return slot the item is in
      */
     public int getSlot() {
         return slot;
