@@ -6,8 +6,8 @@ public class Util {
 
     /**
      * Colors a String
-     * @param s - string with color codes
-     * @return - the colored string
+     * @param s string with color codes
+     * @return the colored string
      */
     public static String Color(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
