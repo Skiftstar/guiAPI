@@ -1,5 +1,6 @@
 package Yukami.guiAPI;
 
+import com.sun.istack.internal.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,22 +14,26 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.util.HashMap;
-import java.util.Map;
+
+import javax.swing.*;
+import java.util.*;
 
 public class guiWindow implements Listener {
 
     Map<ItemStack, guiItem> clickableItems = new HashMap<>();
-    Map<ItemStack, guiItem> borderItems = new HashMap<>();
     private Inventory inv;
     private Player p;
     private int rows;
+    private int slots;
     private String name;
     private boolean fill = false;
     private JavaPlugin plugin;
-    private Material fillMat = null;
-    private String fillName = null;
+    private Material fillMat = null, borderMat = null;
+    private String fillName = null, borderName = null;
     private WindowType type;
+    private int currPage = 1;
+    private Map<Integer, List<guiItem>> pages = new HashMap<>();
+    private boolean usePages = false;
 
     /**
      * Creates a Window (an inventory) that can be further customized
@@ -46,40 +51,10 @@ public class guiWindow implements Listener {
         this.type = type;
         if (rows > 6 || rows < 1) {
             rows = 6;
+            this.rows = 6;
         }
-        // Default border
-        if (type.equals(WindowType.SPLIT_2)) {
-            for (int i = 0; i < rows; i++) {
-                guiItem item = new guiItem(this, Material.WHITE_STAINED_GLASS_PANE, 4 + (i * 9));
-                borderItems.put(item.getItemStack(), item);
-            }
-        }
+        slots = rows * 9;
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
-    }
-
-
-    /**
-     * If the WindowType is set to Split_2 or Split_4, you can change the border material and name
-     * If name is null, the item name will be used
-     * @param mat Material of the border
-     * @param name Name of the Border
-     */
-    public void setBorder(Material mat, String name) {
-        if (!(type.equals(WindowType.SPLIT_2) || type.equals(WindowType.SPLIT_4))) {
-            return;
-        }
-        borderItems.clear();
-        if (name == null) {
-            for (int i = 0; i < rows; i++) {
-                guiItem item = new guiItem(this, mat, 4 + (i * 9));
-                borderItems.put(item.getItemStack(), item);
-            }
-        } else {
-            for (int i = 0; i < rows; i++) {
-                guiItem item = new guiItem(this, mat, name, 4 + (i * 9));
-                borderItems.put(item.getItemStack(), item);
-            }
-        }
     }
 
     /**
@@ -89,45 +64,105 @@ public class guiWindow implements Listener {
      * @param slot Slot the item is in (does not work if a border item is on that slot)
      * @return Returns the created <b>guiItem</b>
      */
-    public guiItem addItemStack(Material mat, String name, int slot) {
+    public guiItem setItemStack(Material mat, String name, int slot, @Nullable Integer page) {
         guiItem item = new guiItem(this, mat, name, slot);
         clickableItems.put(item.getItemStack(), item);
+        if (page != null) {
+            if (!usePages) {
+                return item;
+            }
+
+        }
         return item;
+    }
+
+//    public guiItem addItemStack(Material mat, String name, @Nullable Integer page) {
+//        if ()
+//
+//    }
+
+    private int getNextFree(@Nullable Integer page) {
+        if (page != null) {
+            if (pages.size() < page) {
+                return -1;
+            }
+            if (pages.get(page).size() == slots) {
+                return -1;
+            }
+            List<Integer> slots = new ArrayList<>();
+            for (guiItem is : pages.get(page)) {
+                slots.add(is.getSlot());
+            }
+            Collections.sort(slots);
+            if (slots.get(0) > 0) {
+                return 0;
+            }
+            for (int i = 0; i < slots.size(); i++) {
+               if (slots.get(i) == slots.get(i + 1) - 1)  {
+               } else {
+                   return slots.get(i) + 1;
+               }
+            }
+        }
+        return inv.firstEmpty();
     }
 
     /**
      * creates the inventory and adds all items to it
      */
     private void invSetup() {
+        //Handles all the Items added by the user
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
         for (ItemStack is : clickableItems.keySet()) {
             guiItem item = clickableItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
         }
-        for (ItemStack is : borderItems.keySet()) {
-            guiItem item = borderItems.get(is);
-            inv.setItem(item.getSlot(), item.getItemStack());
+        if (type.equals(WindowType.SPLIT_2)) {
+            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
+            if (borderName != null) {
+                ItemMeta im = borderItem.getItemMeta();
+                im.setDisplayName(borderName);
+                borderItem.setItemMeta(im);
+            }
+            for (int i = 0; i < rows; i++) {
+                int slot = 4 + i * 9;
+                inv.setItem(slot, borderItem);
+            }
         }
     }
 
     /**
-     * Set the FillMaterial for all empty slots of the inventory
-     * @param mat Material of the fill
+     * Enables Page view which allows more items than you can fit in one inventory per guiWindow
+     * @param enabled if pages should be enabled
      */
-    public void setFillInv(Material mat) {
-        fill = true;
-        fillMat = mat;
+    public void setPagesEnabled(boolean enabled) {
+        usePages = enabled;
     }
 
     /**
-     * Set the FillMaterial and the name of the item for all empty slots of the inventory
-     * @param mat Material of the the fill
-     * @param name Name of the fillMat (if you want no name use " ")
+     * Sets the items that are used for the border if the WindowType is Split_2
+     * Default Item is White Stained Glass Pane
+     * @param mat Material of the border items
+     * @param name @Nullable - Name of the border Items (use " " if you want no name)
      */
-    public void setFillInv(Material mat, String name) {
+    public void setBorderInv(Material mat, @Nullable String name) {
+        borderMat = mat;
+        if (name != null) {
+            borderName = name;
+        }
+    }
+
+    /**
+     * Sets the items that fill the empty slots in the inventory
+     * @param mat Material of the fill items
+     * @param name @Nullable - Name of the Fill (use " " if you want no name)
+     */
+    public void setFillInv(Material mat, @Nullable String name) {
         fill = true;
+        if (name != null) {
+            fillName = Util.Color(name);
+        }
         fillMat = mat;
-        fillName = Util.Color(name);
     }
 
     /**
