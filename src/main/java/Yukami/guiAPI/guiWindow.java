@@ -76,10 +76,32 @@ public class guiWindow implements Listener {
         return item;
     }
 
-//    public guiItem addItemStack(Material mat, String name, @Nullable Integer page) {
-//        if ()
-//
-//    }
+    public guiItem addItemStack(Material mat, String name, @Nullable Integer page) {
+        guiItem item;
+        if (page != null) {
+            List<guiItem> currPageItems = pages.size() == 0 ? new ArrayList<>() : pages.get(pages.size());
+            int slot = getNextFree(page);
+            if (slot == -1) {
+                return null;
+            }
+            item = new guiItem(this, mat, name, slot);
+            clickableItems.put(item.getItemStack(), item);
+            currPageItems.add(item);
+            if (pages.size() == 0) {
+                pages.put(1, currPageItems);
+            } else {
+                pages.replace(pages.size(), pages.get(pages.size()), currPageItems);
+            }
+            return item;
+        }
+        int slot = getNextFree(null);
+        if (slot == -1) {
+            return null;
+        }
+        item = new guiItem(this, mat, name, slot);
+        clickableItems.put(item.getItemStack(), item);
+        return item;
+    }
 
     private int getNextFree(@Nullable Integer page) {
         if (page != null) {
@@ -89,20 +111,21 @@ public class guiWindow implements Listener {
             if (pages.get(page).size() == slots) {
                 return -1;
             }
+
             List<Integer> slots = new ArrayList<>();
-            for (guiItem is : pages.get(page)) {
-                slots.add(is.getSlot());
+            List<Integer> temp = new ArrayList<>();
+            int j = 0;
+            for (guiItem item : pages.get(page)) {
+                slots.add(item.getSlot());
+                temp.add(j);
+                j++;
             }
-            Collections.sort(slots);
-            if (slots.get(0) > 0) {
-                return 0;
+            for (int i = 0; i < pages.get(page).size(); i++) {
+                if (temp.contains(slots.get(i))) {
+                    temp.remove(i);
+                }
             }
-            for (int i = 0; i < slots.size(); i++) {
-               if (slots.get(i) == slots.get(i + 1) - 1)  {
-               } else {
-                   return slots.get(i) + 1;
-               }
-            }
+            return temp.size() == 0 ? -1 : temp.get(0);
         }
         return inv.firstEmpty();
     }
