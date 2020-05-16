@@ -1,5 +1,6 @@
 package Yukami.guiAPI;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -252,5 +253,13 @@ public class guiItem {
      */
     public int getSlot() {
         return slot;
+    }
+
+    public String getNoColorName() {
+        ItemMeta im = is.getItemMeta();
+        if (im.hasDisplayName()) {
+            return ChatColor.stripColor(im.getDisplayName());
+        }
+        return null;
     }
 }

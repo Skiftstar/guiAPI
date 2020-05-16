@@ -12,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="1664" />
+    <option name="totalTimeSeconds" value="2259" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -72,6 +72,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="2534" y="145" key="CommitChangelistDialog2" timestamp="1589622158899">
+      <screen x="1920" y="30" width="1920" height="1050" />
+    </state>
+    <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
     <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589547308367">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>

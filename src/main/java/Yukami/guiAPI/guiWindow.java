@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class guiWindow implements Listener {
     private boolean fill = false;
     private JavaPlugin plugin;
     private Material fillMat = null;
+    private String fillName = null;
     private WindowType type;
 
     /**
@@ -117,6 +119,12 @@ public class guiWindow implements Listener {
         fillMat = mat;
     }
 
+    public void setFillInv(Material mat, String name) {
+        fill = true;
+        fillMat = mat;
+        fillName = Util.Color(name);
+    }
+
     /**
      * opens in the inventory
      */
@@ -135,6 +143,11 @@ public class guiWindow implements Listener {
      */
     void fillInv() {
         ItemStack is = new ItemStack(fillMat);
+        if (fillName != null) {
+            ItemMeta im = is.getItemMeta();
+            im.setDisplayName(fillName);
+            is.setItemMeta(im);
+        }
         for (int i = 0; i < inv.getSize(); i++) {
             try {
                 if (inv.getItem(i) == null || inv.getItem(i).getType().equals(Material.AIR)) {
