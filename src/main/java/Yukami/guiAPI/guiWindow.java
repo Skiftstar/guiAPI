@@ -119,6 +119,11 @@ public class guiWindow implements Listener {
         fillMat = mat;
     }
 
+    /**
+     * Set the FillMaterial and the name of the item for all empty slots of the inventory
+     * @param mat Material of the the fill
+     * @param name Name of the fillMat (if you want no name use " ")
+     */
     public void setFillInv(Material mat, String name) {
         fill = true;
         fillMat = mat;

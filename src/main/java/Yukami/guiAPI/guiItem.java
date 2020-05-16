@@ -123,6 +123,9 @@ public class guiItem {
         window.clickableItems.put(is, this);
     }
 
+    /**
+     * Clears the lore of the item
+     */
     public void clearLore() {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
@@ -255,6 +258,9 @@ public class guiItem {
         return slot;
     }
 
+    /**
+     * @return Name of the item without colorCodes
+     */
     public String getNoColorName() {
         ItemMeta im = is.getItemMeta();
         if (im.hasDisplayName()) {
