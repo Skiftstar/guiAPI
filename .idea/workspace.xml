@@ -71,9 +71,14 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2534" y="145" key="CommitChangelistDialog2" timestamp="1589622158899">
-      <screen x="1920" y="30" width="1920" height="1050" />
+    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589623052479">
+      <screen x="0" y="30" width="1920" height="1050" />
     </state>
+    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589623052479" />
+    <state x="614" y="145" key="CommitChangelistDialog2" timestamp="1589623022880">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="614" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589623022880" />
     <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
     <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589547308367">
       <screen x="0" y="30" width="1920" height="1050" />
