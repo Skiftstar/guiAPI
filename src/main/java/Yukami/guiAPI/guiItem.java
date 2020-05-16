@@ -1,18 +1,21 @@
 package Yukami.guiAPI;
 
 import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class guiItem {
 
     private ItemStack is;
-    private Function<Void, Void> functionClick = null;
+    private Consumer<InventoryClickEvent> functionClick = null;
     private guiWindow window;
     private int slot;
     private Inventory inv;
@@ -119,6 +122,17 @@ public class guiItem {
         window.clickableItems.put(is, this);
     }
 
+    public void clearLore() {
+        ItemMeta im = is.getItemMeta();
+        window.clickableItems.remove(is);
+        if (im.hasLore()) {
+            im.setLore(null);
+        }
+        is.setItemMeta(im);
+        inv.setItem(slot, is);
+        window.clickableItems.put(is, this);
+    }
+
     /**
      * Adds a single line to the Item lore
      * @param lore - Line to be added
@@ -210,18 +224,18 @@ public class guiItem {
      * Adds a function that will be executed once the item gets clicked
      * @param function - A Void,Void function (it's java.lang.Void so it has to return null)
      */
-    public void setOnClick(Function<Void, Void> function) {
+    public void setOnClick(Consumer<InventoryClickEvent> function) {
         functionClick = function;
     }
 
     /**
      * Gets called when the item is clicked
      */
-    public void onClick() {
+    public void onClick(InventoryClickEvent e) {
         if (functionClick == null) {
             return;
         }
-        functionClick.apply(null);
+        functionClick.accept(e);
     }
 
     /**

@@ -188,7 +188,7 @@ public class guiWindow implements Listener {
         if (!clickableItems.containsKey(is)) {
             return;
         }
-        clickableItems.get(is).onClick();
+        clickableItems.get(is).onClick(e);
     }
 
     @EventHandler
