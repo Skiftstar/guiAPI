@@ -13,8 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.*;
 
 public class guiWindow implements Listener {
@@ -268,6 +266,7 @@ public class guiWindow implements Listener {
         if (pageArgs.length > 0) {
             pageItems[slot] = item;
             pages.replace(pageArgs[0], pages.get(pageArgs[0]), pageItems);
+            item.setPage(pageArgs[0]);
         }
         // add it as a clickable item and return it
         clickableItems.put(item.getItemStack(), item);
@@ -311,6 +310,7 @@ public class guiWindow implements Listener {
             if (currPage == page) {
                 inv.setItem(slot, item.getItemStack());
             }
+            item.setPage(pageArgs[0]);
             return item;
         }
         // If no page is provided but pages are used
@@ -330,6 +330,7 @@ public class guiWindow implements Listener {
             if (currPage == pages.size()) {
                 inv.setItem(slot, item.getItemStack());
             }
+            item.setPage(pages.size());
             return item;
         }
         // Same slot checking as above
@@ -378,9 +379,9 @@ public class guiWindow implements Listener {
      * It will be cleared completely and then all items will be added back.
      */
     public void updateInventory() {
-        //Handles all the Items added by the user
         inv.clear();
         if (usePages) {
+            // Get the currentPage, loop through the items, update their slots just in case and place them in the inv
             guiItem[] page = pages.get(currPage);
             for (int i = 0; i < page.length; i++) {
                 if (page[i] == null) {
@@ -416,13 +417,16 @@ public class guiWindow implements Listener {
      */
 
     private void addNewPage() {
+        // Get the item that blocks the pageSwapper
         guiItem moveForward;
         guiItem[] page = pages.get(pages.size());
+        // This needs to be a special case because page 1 is the only page without "go Back 1 Page" Item
         if (pages.size() == 1) {
             moveForward = page[slots - 1];
         } else {
             moveForward = page[slots - 2];
         }
+        // Item to go forward 1 page
         guiItem pageForward = nextPageMat == null ? new guiItem(this, Material.ARROW, "&aNext Page", slots - 1) : new guiItem(this, nextPageMat, "&aNext Page", slots - 1);
         if (nextPageName != null) {
             pageForward.setName(nextPageName);
@@ -432,15 +436,20 @@ public class guiWindow implements Listener {
         });
         pageChangersForward.add(pageForward);
         clickableItems.put(pageForward.getItemStack(), pageForward);
+        // Again, special case because this would not work for Page 1
+        // Just move the "Page Back" Item one slot to the left so that it fits the layout
         if (pages.size() > 1) {
             guiItem oldBack = page[slots - 1];
             page[slots - 2] = oldBack;
         }
+        // If the player has a page open that is being edited, update just what needs to be updated
         if (currPage == pages.size()) {
             inv.setItem(slots - 1, pageForward.getItemStack());
         }
         page[slots - 1] = pageForward;
         pages.replace(pages.size(), pages.get(pages.size()), page);
+
+        // Creates the new page and the item that allows the user to back one page
         guiItem[] newPage = new guiItem[slots];
         guiItem pageBack = prevPageMat == null ? new guiItem(this, Material.ARROW, "&cPrevious Page", slots - 1) : new guiItem(this, prevPageMat, "&cPrevious Page", slots - 1);
         if (prevPageName != null) {
@@ -451,11 +460,11 @@ public class guiWindow implements Listener {
         });
         pageChangersBackward.add(pageBack);
         clickableItems.put(pageBack.getItemStack(), pageBack);
+        // add the items to the page and save the page
         newPage[slots - 1] = pageBack;
         newPage[0] = moveForward;
-        System.out.println("Davor: " + Arrays.toString(newPage));
+        moveForward.setPage(moveForward.getPage() + 1);
         pages.put(pages.size() + 1, newPage);
-        System.out.println("Danach: " + Arrays.toString(newPage));
     }
 
     /**
@@ -548,5 +557,19 @@ public class guiWindow implements Listener {
      */
     public Inventory getInv() {
         return inv;
+    }
+
+    /**
+     * @return What page the Player has open or -1 if pages are disabled
+     */
+    public int getCurrPage() {
+        return usePages ? currPage : -1;
+    }
+
+    /**
+     * @return The amount of pages or -1 if pages are disabled
+     */
+    public int getPageCount() {
+        return usePages ? pages.size() : -1;
     }
 }

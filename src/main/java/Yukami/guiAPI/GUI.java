@@ -41,6 +41,12 @@ public class GUI {
         return window;
     }
 
+    /*
+    ==========================================
+                User Accessible
+    ==========================================
+     */
+
     /**
      * Opens a specified window (inventory) for the player
      * @param window window to open
@@ -63,8 +69,13 @@ public class GUI {
         windows.remove(window);
     }
 
+    /*
+    ==========================================
+                Get Methods
+    ==========================================
+     */
+
     /**
-     *
      * @return all windows handled by this GUI
      */
     public List<guiWindow> getWindows() {
@@ -72,7 +83,6 @@ public class GUI {
     }
 
     /**
-     *
      * @return The window that is currently open
      */
     public guiWindow getCurrWindow() {

@@ -17,6 +17,7 @@ public class guiItem {
     private guiWindow window;
     private int slot;
     private Inventory inv;
+    private int page = -1;
 
     /**
      *
@@ -70,42 +71,11 @@ public class guiItem {
         is = new ItemStack(mat);
     }
 
-    /**
-     * Changes the item slot. Item in old slot will be removed
-     * @param slot slot the item will be put in
+    /*
+    ==========================================
+                Lore Related
+    ==========================================
      */
-    public void setSlot(int slot) {
-        this.slot = slot;
-        inv.setItem(slot, is);
-    }
-
-    /**
-     * Changes the Item material
-     * @param mat - Material the item should be changed to
-     */
-    public void setMaterial(Material mat) {
-        window.clickableItems.remove(is);
-        is.setType(mat);
-        window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
-    }
-
-    /**
-     * Changes the amount of items in the ItemStack
-     * @param count - amount of items in the ItemStack
-     */
-    public void setAmount(int count) {
-        if (count < 1) {
-            count = 1;
-        }
-        else if (count > 64) {
-            count = 64;
-        }
-        window.clickableItems.remove(is);
-        is.setAmount(count);
-        window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
-    }
 
     /**
      * Sets a preset Lore
@@ -208,6 +178,12 @@ public class guiItem {
         inv.setItem(slot, is);
     }
 
+    /*
+    ==========================================
+                Set Methods
+    ==========================================
+     */
+
     /**
      * Updates the item name
      * @param name - New name of the item
@@ -222,12 +198,52 @@ public class guiItem {
     }
 
     /**
-     * Adds a function that will be executed once the item gets clicked
-     * @param function - A Void,Void function (it's java.lang.Void so it has to return null)
+     * Changes the item slot. Item in old slot will be removed
+     * @param slot slot the item will be put in
      */
-    public void setOnClick(Consumer<InventoryClickEvent> function) {
-        functionClick = function;
+    public void setSlot(int slot) {
+        this.slot = slot;
+        inv.setItem(slot, is);
     }
+
+    /**
+     * Changes the Item material
+     * @param mat - Material the item should be changed to
+     */
+    public void setMaterial(Material mat) {
+        window.clickableItems.remove(is);
+        is.setType(mat);
+        window.clickableItems.put(is, this);
+        inv.setItem(slot, is);
+    }
+
+    /**
+     * Changes the amount of items in the ItemStack
+     * @param count - amount of items in the ItemStack
+     */
+    public void setAmount(int count) {
+        if (count < 1) {
+            count = 1;
+        }
+        else if (count > 64) {
+            count = 64;
+        }
+        window.clickableItems.remove(is);
+        is.setAmount(count);
+        window.clickableItems.put(is, this);
+        inv.setItem(slot, is);
+    }
+
+    //Only private for now, will change later so that items can be moved around
+    void setPage(int page) {
+        this.page = page;
+    }
+
+    /*
+    ==========================================
+                Event Related
+    ==========================================
+     */
 
     /*
      * Gets called when the item is clicked
@@ -238,6 +254,21 @@ public class guiItem {
         }
         functionClick.accept(e);
     }
+
+    /**
+     * Adds a function that will be executed once the item gets clicked
+     * @param function - A Void,Void function (it's java.lang.Void so it has to return null)
+     */
+    public void setOnClick(Consumer<InventoryClickEvent> function) {
+        functionClick = function;
+    }
+
+
+    /*
+    ==========================================
+                Get Methods
+    ==========================================
+     */
 
     /**
      *
@@ -264,5 +295,12 @@ public class guiItem {
             return ChatColor.stripColor(im.getDisplayName());
         }
         return null;
+    }
+
+    /**
+     * @return Page the item is on or -1 if the item isn't on a page/pages are disabled
+     */
+    public int getPage() {
+        return page;
     }
 }
