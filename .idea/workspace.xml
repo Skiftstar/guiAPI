@@ -7,11 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="22143" />
+    <option name="totalTimeSeconds" value="28978" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -120,43 +121,51 @@
     </state>
     <state x="827" y="109" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589633913296" />
     <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
-    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589733592464">
+    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589748465014">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1180" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572834429" />
     <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733592464" />
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1589736779577">
+    <state x="740" y="309" key="FileChooserDialogImpl/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748465014" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1589739177742">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589736779577" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1589736779576">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589739177742" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1589739177742">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589736779576" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1589736779576">
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589739177742" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1589739177741">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589736779576" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1589736779577">
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589739177741" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1589739177742">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589736779577" />
-    <state x="440" y="129" key="SettingsEditor" timestamp="1589733611815">
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589739177742" />
+    <state x="440" y="129" key="SettingsEditor" timestamp="1589748501915">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
     <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733611815" />
+    <state x="440" y="129" key="SettingsEditor/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501915" />
     <state x="342" y="250" key="new project wizard" timestamp="1587639150505">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="342" y="250" key="new project wizard/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1587639150505" />
-    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589733611129">
+    <state x="712" y="358" width="621" height="480" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589748501262">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733611129" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589729698907">
+    <state x="712" y="358" width="621" height="480" key="org.intellij.images.editor.actions.BackgroundImageDialog/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501261" />
+    <state x="616" y="258" key="run.anything.popup" timestamp="1589754167294">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="616" y="258" key="run.anything.popup/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589754167294" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589752211677">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589729698907" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589752211677" />
   </component>
 </project>
