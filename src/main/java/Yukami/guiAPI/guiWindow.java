@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.*;
 
 public class guiWindow implements Listener {
@@ -70,16 +71,16 @@ public class guiWindow implements Listener {
     public guiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
         guiItem item;
         guiItem[] pageItems = new guiItem[slots];
-        if (pageArgs != null) {
+        if (pageArgs.length > 0) {
             // Prevents saving Items where they won't be used
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\nMake sure you enable pages for this window before adding items to pages!"));
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
                 return null;
             }
             int page = pageArgs[0];
             // If the page doesn't exist yet
             if (pages.size() < page || page <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\nRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
                 return null;
             }
             // Get the items on the page
@@ -104,7 +105,7 @@ public class guiWindow implements Listener {
         }
         // Create the item and add it to the page if a page is provided.
         item = new guiItem(this, mat, name, slot);
-        if (pageArgs != null) {
+        if (pageArgs.length > 0) {
             pageItems[slot] = item;
             pages.replace(pageArgs[0], pages.get(pageArgs[0]), pageItems);
         }
@@ -123,15 +124,15 @@ public class guiWindow implements Listener {
      */
     public guiItem addItemStack(Material mat, String name, Integer... pageArgs) {
         guiItem item;
-        if (pageArgs != null) {
+        if (pageArgs.length > 0) {
             // Possible Errors
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\nMake sure you enable pages for this window before adding items to pages!"));
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
                 return null;
             }
             int page = pageArgs[0];
             if (pages.size() < page || page <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\nRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
                 return null;
             }
 
@@ -139,7 +140,7 @@ public class guiWindow implements Listener {
             // Check if there is a free slot on the page
             int slot = getNextFree(page);
             if (slot == -1) {
-                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to a page that is full!\nItem was not Added!"));
+                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to a page that is full!\n&cItem was not Added!"));
                 return null;
             }
             // if there is a free slot, create the item and add it to the page and clickable items
@@ -147,6 +148,9 @@ public class guiWindow implements Listener {
             clickableItems.put(item.getItemStack(), item);
             pageItems[slot] = item;
             pages.replace(pages.size(), pages.get(pages.size()), pageItems);
+            if (currPage == page) {
+                inv.setItem(slot, item.getItemStack());
+            }
             return item;
         }
         // If no page is provided but pages are used
@@ -163,16 +167,20 @@ public class guiWindow implements Listener {
             pageItems[slot] = item;
             clickableItems.put(item.getItemStack(), item);
             pages.replace(pages.size(), pages.get(pages.size()), pageItems);
+            if (currPage == pages.size()) {
+                inv.setItem(slot, item.getItemStack());
+            }
             return item;
         }
         // Same slot checking as above
         int slot = getNextFree();
         if (slot == -1) {
-            System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to the inventory but it is full!\nItem was not Added!"));
+            System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to the inventory but it is full!\n&cItem was not Added!"));
             return null;
         }
         item = new guiItem(this, mat, name, slot);
         clickableItems.put(item.getItemStack(), item);
+        inv.setItem(item.getSlot(), item.getItemStack());
         return item;
     }
 
@@ -184,11 +192,11 @@ public class guiWindow implements Listener {
      */
     public int getNextFree(Integer... pageArgs) {
         // If the next free slot on a specific page is wanted
-        if (pageArgs != null) {
+        if (pageArgs.length > 0) {
             int page = pageArgs[0];
             // Page doesn't exist, just say it's full
             if (pages.size() < page) {
-                System.out.println(Util.Color("&c[guiAPI] There was an attempt to get the next free slot of a page that doesn't exist!\nRemember pages start at 1!\nReturned a full inventory to not cause any errors."));
+                System.out.println(Util.Color("&c[guiAPI] There was an attempt to get the next free slot of a page that doesn't exist!\n&cRemember pages start at 1!\nReturned a full inventory to not cause any errors."));
                 return -1;
             }
             guiItem[] items = pages.get(page);
@@ -213,7 +221,10 @@ public class guiWindow implements Listener {
         } else {
             moveForward = page[slots - 2];
         }
-        guiItem pageForward = nextPageName == null ? new guiItem(this, nextPageMat, slots - 1) : new guiItem(this, nextPageMat, nextPageName, slots - 1);
+        guiItem pageForward = nextPageMat == null ? new guiItem(this, Material.ARROW, "&aNext Page", slots - 1) : new guiItem(this, nextPageMat, "&aNext Page", slots - 1);
+        if (nextPageName != null) {
+            pageForward.setName(nextPageName);
+        }
         pageForward.setOnClick(e -> {
             changePage(currPage + 1);
         });
@@ -223,18 +234,26 @@ public class guiWindow implements Listener {
             guiItem oldBack = page[slots - 1];
             page[slots - 2] = oldBack;
         }
+        if (currPage == pages.size()) {
+            inv.setItem(slots - 1, pageForward.getItemStack());
+        }
         page[slots - 1] = pageForward;
         pages.replace(pages.size(), pages.get(pages.size()), page);
         guiItem[] newPage = new guiItem[slots];
-        newPage[0] = moveForward;
-        guiItem pageBack = nextPageName == null ? new guiItem(this, prevPageMat, slots - 1) : new guiItem(this, prevPageMat, prevPageName, slots - 1);
-        pageForward.setOnClick(e -> {
+        guiItem pageBack = prevPageMat == null ? new guiItem(this, Material.ARROW, "&cPrevious Page", slots - 1) : new guiItem(this, prevPageMat, "&cPrevious Page", slots - 1);
+        if (prevPageName != null) {
+            pageBack.setName(prevPageName);
+        }
+        pageBack.setOnClick(e -> {
             changePage(currPage - 1);
         });
         pageChangersBackward.add(pageBack);
         clickableItems.put(pageBack.getItemStack(), pageBack);
         newPage[slots - 1] = pageBack;
+        newPage[0] = moveForward;
+        System.out.println("Davor: " + Arrays.toString(newPage));
         pages.put(pages.size() + 1, newPage);
+        System.out.println("Danach: " + Arrays.toString(newPage));
     }
 
     /**
@@ -243,7 +262,48 @@ public class guiWindow implements Listener {
      * @param page Page to open
      */
     public void changePage(int page) {
+        if (!usePages) {
+            System.out.println("&c[guiAPI] There was an attempt to change pages but pages aren't enabled yet!\n&cMake sure to enable them before using any related methods!");
+            return;
+        }
+        if (page < 1 || page > pages.size()) {
+            System.out.println("&c[guiAPI] There was an attempt to change to a page that doesn't exist!\n&cRemember that Pages start at 1 !");
+            return;
+        }
         currPage = page;
+        updateInventory();
+    }
+
+    public void updateInventory() {
+        //Handles all the Items added by the user
+        inv.clear();
+        if (usePages) {
+            guiItem[] page = pages.get(currPage);
+            for (int i = 0; i < page.length; i++) {
+                if (page[i] == null) {
+                    continue;
+                }
+                page[i].setSlot(i);
+                inv.setItem(i, page[i].getItemStack());
+            }
+            return;
+        }
+        for (ItemStack is : clickableItems.keySet()) {
+            guiItem item = clickableItems.get(is);
+            inv.setItem(item.getSlot(), item.getItemStack());
+        }
+        if (type.equals(WindowType.SPLIT_2)) {
+            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
+            if (borderName != null) {
+                ItemMeta im = borderItem.getItemMeta();
+                im.setDisplayName(borderName);
+                borderItem.setItemMeta(im);
+            }
+            for (int i = 0; i < rows; i++) {
+                int slot = 4 + i * 9;
+                inv.setItem(slot, borderItem);
+            }
+        }
     }
 
     /*
@@ -253,7 +313,11 @@ public class guiWindow implements Listener {
         //Handles all the Items added by the user
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
         if (usePages) {
+            System.out.println(pages.size() + "\n" + pages.get(1).length);
             for (guiItem is : pages.get(1)) {
+                if (is == null) {
+                    continue;
+                }
                 inv.setItem(is.getSlot(), is.getItemStack());
             }
             return;

@@ -1,0 +1,5 @@
+name: guiAPI
+author: Yukiu
+version: 1.0.0
+api-version: 1.15
+main: Yukami.guiAPI.Main

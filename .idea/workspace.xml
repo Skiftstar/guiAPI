@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="guiAPI:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="15717" />
+    <option name="totalTimeSeconds" value="19940" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -32,9 +41,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -109,11 +119,11 @@
     </state>
     <state x="827" y="109" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589633913296" />
     <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
-    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589717200208">
+    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589733592464">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1180" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572834429" />
-    <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717200208" />
+    <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733592464" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1589724834910">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -130,19 +140,19 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589724834910" />
-    <state x="440" y="129" key="SettingsEditor" timestamp="1589729887428">
+    <state x="440" y="129" key="SettingsEditor" timestamp="1589733611815">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
-    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589729887428" />
+    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733611815" />
     <state x="342" y="250" key="new project wizard" timestamp="1587639150505">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="342" y="250" key="new project wizard/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1587639150505" />
-    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589717219792">
+    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589733611129">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717219792" />
+    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733611129" />
     <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589729698907">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
