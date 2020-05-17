@@ -229,10 +229,10 @@ public class guiItem {
         functionClick = function;
     }
 
-    /**
+    /*
      * Gets called when the item is clicked
      */
-    public void onClick(InventoryClickEvent e) {
+    void onClick(InventoryClickEvent e) {
         if (functionClick == null) {
             return;
         }

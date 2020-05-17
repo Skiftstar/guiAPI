@@ -3,6 +3,32 @@
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/Util.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/Util.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/WindowType.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/WindowType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiWindow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +37,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="7878" />
+    <option name="totalTimeSeconds" value="10246" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -28,7 +54,6 @@
   </component>
   <component name="ProjectId" id="1au4uMK0h5kOvfeObj1k5o6Vjxs" />
   <component name="ProjectViewState">
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -37,7 +62,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -85,61 +110,68 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="JavaDoc Changes" />
     <option name="LAST_COMMIT_MESSAGE" value="JavaDoc Changes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589623052479">
+    <state x="640" y="291" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1589715082003">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589623052479" />
+    <state x="640" y="291" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589715082003" />
+    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589718771659">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="707" y="278" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589718771659" />
     <state x="827" y="109" key="CommitChangelistDialog2" timestamp="1589633913296">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="827" y="109" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589633913296" />
     <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
-    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589547308367">
+    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589717200208">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1180" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572834429" />
-    <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589547308367" />
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1589634671087">
+    <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717200208" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1589718771745">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589634671087" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1589634671087">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589718771745" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1589718771745">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589634671087" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1589634671086">
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589718771745" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1589718771745">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589634671086" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1589634671087">
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589718771745" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1589718771745">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589634671087" />
-    <state x="440" y="129" key="SettingsEditor" timestamp="1589626004875">
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589718771745" />
+    <state x="440" y="129" key="SettingsEditor" timestamp="1589717220540">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
-    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589626004875" />
+    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717220540" />
     <state x="342" y="250" key="new project wizard" timestamp="1587639150505">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="342" y="250" key="new project wizard/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1587639150505" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589645730310">
+    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589717219792">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589645730310" />
+    <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717219792" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589717574285">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717574285" />
   </component>
 </project>
