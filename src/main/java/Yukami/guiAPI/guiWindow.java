@@ -366,7 +366,7 @@ public class guiWindow implements Listener {
         // Again, special case because this would not work for Page 1
         // Just move the "Page Back" Item one slot to the left so that it fits the layout
         if (pages.size() > 1) {
-            guiItem oldBack = page.getPrevPage();
+            guiItem oldBack = page.getPrevPageItem();
             page.moveItem(oldBack, slots - 2);
         }
         page.setNextPageItem();

@@ -7,13 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="28978" />
+    <option name="totalTimeSeconds" value="29288" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">

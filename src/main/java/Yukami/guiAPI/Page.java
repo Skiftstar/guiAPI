@@ -17,12 +17,26 @@ public class Page {
     private guiItem prevPage = null;
     private List<Integer> changedSlots = new ArrayList<>();
 
+    /**
+     * Creates a new page
+     * @param slots slots on the page, changing this from the slots the window has causes errors!!
+     * @param pageNr the page number, duplicates can cause errors!
+     * @param window the window the page is on
+     */
     public Page(int slots, int pageNr, guiWindow window) {
         this.slots = slots;
         this.pageNr = pageNr;
         this.window = window;
         items = new guiItem[slots];
     }
+
+    /**
+     * Creates a page with already given items
+     * @param slots slots on the page, changing this from the slots the window has causes errors!!
+     * @param items array of guiItems that should be added to the page already
+     * @param pageNr the page number, duplicates can cause errors!
+     * @param window the window the page is on
+     */
     public Page(int slots, guiItem[] items, int pageNr, guiWindow window) {
         this.slots = slots;
         this.items = items;
@@ -30,6 +44,10 @@ public class Page {
         this.pageNr = pageNr;
     }
 
+    /**
+     * Clears all slots with this guiItem in it
+     * @param item guiItem to remove
+     */
     public void removeItem(guiItem item) {
         for (int i = 0; i < items.length; i++) {
             if (items[i].equals(item)) {
@@ -41,6 +59,10 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Clears all slots with this itemStack in it
+     * @param is ItemStack to remove
+     */
     public void removeItem(ItemStack is) {
         for (int i = 0; i < items.length; i++) {
             if (items[i].getItemStack().equals(is)) {
@@ -52,6 +74,10 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Clears a provided slot on the page
+     * @param slot Slot to clear
+     */
     public void removeItem(int slot) {
         if (items[slot] != null) {
             window.clickableItems.remove(items[slot].getItemStack());
@@ -61,6 +87,11 @@ public class Page {
         }
     }
 
+    /**
+     * Adds an item to the page
+     * @param item item to add
+     * @param slotArgs <b>[Optional]</b> slot to add the item, if no slot is provided it will be added to the next free slot
+     */
     public void addItem(guiItem item, Integer... slotArgs) {
         int slot;
         if (slotArgs.length > 0) {
@@ -85,6 +116,11 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Moves an item to a different slot
+     * @param item guiItem to move
+     * @param slot slot to move to
+     */
     public void moveItem(guiItem item, int slot) {
         items[item.getSlot()] = null;
         changedSlots.add(item.getSlot());
@@ -94,6 +130,9 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Adds the "Next Page" Item to the page
+     */
     public void setNextPageItem() {
         if (nextPage != null) {
             window.clickableItems.remove(nextPage.getItemStack());
@@ -113,6 +152,9 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Adds the "Previous Page" Item to the page
+     */
     public void setPrevPageItem() {
         if (prevPage != null) {
             window.clickableItems.remove(prevPage.getItemStack());
@@ -131,6 +173,9 @@ public class Page {
         checkUpdate();
     }
 
+    /**
+     * Updates the Page Changer Items using the values provided in the guiWindow
+     */
     public void updatePageChangers() {
         if (prevPage == null || nextPage == null) {
             System.out.println(Util.Color("&c[guiAPI] There was an attempt to update the page changers when they weren't set yet!\n&cMake sure to set them first to avoid errors!"));
@@ -182,6 +227,9 @@ public class Page {
     ========================================================
      */
 
+    /**
+     * @return Next Free slot or -1 if the page is full
+     */
     public int getNextFree() {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
@@ -192,6 +240,10 @@ public class Page {
         return -1;
     }
 
+    /**
+     * @param slot Slot you want the item of
+     * @return guiItem in this slot or null if the slot is empty
+     */
     public guiItem getItem(int slot) {
         if (slot > slots - 1 || slot < 0) {
             return null;
@@ -199,19 +251,31 @@ public class Page {
         return items[slot];
     }
 
+    /**
+     * @return the number of the page
+     */
     public int getPageNr() {
         return pageNr;
     }
 
+    /**
+     * @return all guiItems on the page (also the empty slots, they are null)
+     */
     public guiItem[] getItems() {
         return items;
     }
 
-    public guiItem getNextPage() {
+    /**
+     * @return the "next page" item
+     */
+    public guiItem getNextPageItem() {
         return nextPage;
     }
 
-    public guiItem getPrevPage() {
+    /**
+     * @return the "previous page" item
+     */
+    public guiItem getPrevPageItem() {
         return prevPage;
     }
 }
