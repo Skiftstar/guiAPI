@@ -203,8 +203,35 @@ public class guiWindow implements Listener {
     private void addNewPage() {
         guiItem moveForward1, moveForward2;
         if (pages.size() == 1) {
-            moveForward1 = pages.get(1)[slots -1];
+            guiItem[] page = pages.get(1);
+            moveForward1 = page[slots -1];
+            guiItem pageForward = nextPageName == null ? new guiItem(this, nextPageMat, slots - 1) : new guiItem(this, nextPageMat, nextPageName, slots - 1);
+            pageForward.setOnClick(e -> {
+                changePage(currPage + 1);
+            });
+            pageChangersForward.add(pageForward);
+            clickableItems.put(pageForward.getItemStack(), pageForward);
+            page[slots - 1] = pageForward;
+            pages.replace(1, pages.get(1), page);
+            guiItem[] newPage = new guiItem[slots];
+            newPage[0] = moveForward1;
+            guiItem pageBack = nextPageName == null ? new guiItem(this, prevPageMat, slots - 1) : new guiItem(this, prevPageMat, prevPageName, slots - 1);
+            pageForward.setOnClick(e -> {
+                changePage(currPage - 1);
+            });
+            pageChangersBackward.add(pageBack);
+            clickableItems.put(pageBack.getItemStack(), pageBack);
+            newPage[slots -1] = pageBack;
+            pages.put(2, newPage);
         }
+    }
+
+    /**
+     * Opens the specified page
+     * @param page Page to open
+     */
+    public void changePage(int page) {
+
     }
 
     /*
