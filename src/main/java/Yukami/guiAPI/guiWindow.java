@@ -1,6 +1,5 @@
 package Yukami.guiAPI;
 
-import com.sun.istack.internal.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,8 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.swing.*;
 import java.util.*;
 
 public class guiWindow implements Listener {
@@ -28,11 +25,12 @@ public class guiWindow implements Listener {
     private String name;
     private boolean fill = false;
     private JavaPlugin plugin;
-    private Material fillMat = null, borderMat = null;
-    private String fillName = null, borderName = null;
+    private Material fillMat = null, borderMat = null, nextPageMat = null, prevPageMat = null;
+    private String fillName = null, borderName = null, nextPageName = null, prevPageName = null;
+    private List<guiItem> pageChangersForward = new ArrayList<>(), pageChangersBackward = new ArrayList<>();
     private WindowType type;
     private int currPage = 1;
-    private Map<Integer, List<guiItem>> pages = new HashMap<>();
+    private Map<Integer, guiItem[]> pages = new HashMap<>();
     private boolean usePages = false;
 
     /**
@@ -68,7 +66,7 @@ public class guiWindow implements Listener {
      */
     public guiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
         guiItem item;
-        List<guiItem> pageItems = new ArrayList<>();
+        guiItem[] pageItems = new guiItem[slots];
         if (pageArgs != null) {
             // Prevents saving Items where they won't be used
             if (!usePages) {
@@ -77,18 +75,15 @@ public class guiWindow implements Listener {
             }
             int page = pageArgs[0];
             // If the page doesn't exist yet
-            if (pages.size() < page) {
+            if (pages.size() < page || page <= 0) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\nRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
                 return null;
             }
             // Get the items on the page
             pageItems = pages.get(page);
             // Check if any Item is already in that slot, if so, remove it
-            for (int i = 0; i < pageItems.size(); i++) {
-                if (pageItems.get(i).getSlot() == slot) {
-                    clickableItems.remove(pageItems.get(i).getItemStack());
-                    pageItems.remove(i);
-                    break;
-                }
+            if (pageItems[slot] != null) {
+                clickableItems.remove(pageItems[slot].getItemStack());
             }
         } else {
             // You need a different check for preexisting items when there is no page provided.
@@ -107,7 +102,7 @@ public class guiWindow implements Listener {
         // Create the item and add it to the page if a page is provided.
         item = new guiItem(this, mat, name, slot);
         if (pageArgs != null) {
-            pageItems.add(item);
+            pageItems[slot] = item;
             pages.replace(pageArgs[0], pages.get(pageArgs[0]), pageItems);
         }
         // add it as a clickable item and return it
@@ -117,7 +112,6 @@ public class guiWindow implements Listener {
 
     /**
      * Adds an item to the inventory or a specific page (if one is provided)
-     *
      * @param mat Material of the Item
      * @param name Name of the Item
      * @param pageArgs <b>[Optional]</b> page the item will be on (enable pages first!)
@@ -126,28 +120,51 @@ public class guiWindow implements Listener {
     public guiItem addItemStack(Material mat, String name, Integer... pageArgs) {
         guiItem item;
         if (pageArgs != null) {
+            // Possible Errors
             if (!usePages) {
                 System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\nMake sure you enable pages for this window before adding items to pages!"));
                 return null;
             }
             int page = pageArgs[0];
-            List<guiItem> currPageItems = pages.size() == 0 ? new ArrayList<>() : pages.get(pages.size());
-            int slot = getNextFree(page);
-            if (slot == -1) {
+            if (pages.size() < page || page <= 0) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\nRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
                 return null;
             }
+
+            guiItem[] pageItems = pages.get(page);
+            // Check if there is a free slot on the page
+            int slot = getNextFree(page);
+            if (slot == -1) {
+                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to a page that is full!\nItem was not Added!"));
+                return null;
+            }
+            // if there is a free slot, create the item and add it to the page and clickable items
             item = new guiItem(this, mat, name, slot);
             clickableItems.put(item.getItemStack(), item);
-            currPageItems.add(item);
-            if (pages.size() == 0) {
-                pages.put(1, currPageItems);
-            } else {
-                pages.replace(pages.size(), pages.get(pages.size()), currPageItems);
-            }
+            pageItems[slot] = item;
+            pages.replace(pages.size(), pages.get(pages.size()), pageItems);
             return item;
         }
+        // If no page is provided but pages are used
+        if (usePages) {
+            //check if the current page is full, if so add a new one
+            int slot = getNextFree(pages.size());
+            if (slot == -1) {
+                addNewPage();
+            }
+            // then just add the item
+            slot = getNextFree(pages.size());
+            guiItem[] pageItems = pages.get(pages.size());
+            item = new guiItem(this, mat, name, slot);
+            pageItems[slot] = item;
+            clickableItems.put(item.getItemStack(), item);
+            pages.replace(pages.size(), pages.get(pages.size()), pageItems);
+            return item;
+        }
+        // Same slot checking as above
         int slot = getNextFree();
         if (slot == -1) {
+            System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an Item to the inventory but it is full!\nItem was not Added!"));
             return null;
         }
         item = new guiItem(this, mat, name, slot);
@@ -155,34 +172,42 @@ public class guiWindow implements Listener {
         return item;
     }
 
-    /*
-    Returns the next free slot in the entire inventory or on a specific page (if pages are enabled)
+    /**
+     * Returns the next free slot in the entire inventory or on a specific page (if pages are enabled)
+     * @param pageArgs <b>[Optional]</b> page you want to get the next free slot of
+     * @return the next free slot or -1 if the inv/page is full
      */
-    private int getNextFree(Integer... pageArgs) {
+    public int getNextFree(Integer... pageArgs) {
+        // If the next free slot on a specific page is wanted
         if (pageArgs != null) {
             int page = pageArgs[0];
+            // Page doesn't exist, just say it's full
             if (pages.size() < page) {
+                System.out.println(Util.Color("&c[guiAPI] There was an attempt to get the next free slot of a page that doesn't exist!\nRemember pages start at 1!\nReturned a full inventory to not cause any errors."));
                 return -1;
             }
-            if (pages.get(page).size() == slots) {
-                return -1;
+            guiItem[] items = pages.get(page);
+            // Loop through the items until the first empty index is found
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] == null) {
+                    return i;
+                }
             }
-
-            List<Integer> slots = new ArrayList<>();
-            for (guiItem item : pages.get(page)) {
-                slots.add(item.getSlot());
-            }
-            ArrayList<Integer> a = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53).subList(0,slots.size()));
-            a.add(-1);
-            for( Integer f : slots){
-                a.remove(f);
-            }
-            return a.get(0);
+            // if there is no empty index, return -1 to show the inv is full
+            return -1;
         }
+        // If there isn't a specific page wanted, just use the current open inv and use the function provided by spigot
         return inv.firstEmpty();
     }
 
-    /**
+    private void addNewPage() {
+        guiItem moveForward1, moveForward2;
+        if (pages.size() == 1) {
+            moveForward1 = pages.get(1)[slots -1];
+        }
+    }
+
+    /*
      * creates the inventory and adds all items to it
      */
     private void invSetup() {
@@ -212,6 +237,9 @@ public class guiWindow implements Listener {
      */
     public void setPagesEnabled(boolean enabled) {
         usePages = enabled;
+        if (pages.size() == 0) {
+            pages.put(1, new guiItem[slots]);
+        }
     }
 
     /**
@@ -238,6 +266,71 @@ public class guiWindow implements Listener {
             fillName = Util.Color(nameArgs[0]);
         }
         fillMat = mat;
+    }
+
+    /**
+     * Sets the Material and the name of the item used to go a page forward
+     * @param mat Material of the Item
+     * @param nameArgs <b>[Optional]</b> name of the item
+     */
+    public void setNextPageItem(Material mat, String... nameArgs) {
+        if (nameArgs != null) {
+            nextPageName = nameArgs[0];
+        }
+        nextPageMat = mat;
+        // Update Existing Page Changers
+        for (guiItem item : pageChangersForward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+    }
+
+    /**
+     * Sets the Material and name of the item used to go a page back
+     * @param mat Material of the Item
+     * @param nameArgs <b>[Optional]</b> name of the item
+     */
+    public void setPrevPageItem(Material mat, String... nameArgs) {
+        if (nameArgs != null) {
+            prevPageName = nameArgs[0];
+        }
+        prevPageMat = mat;
+        // Update existing PageChangers
+        for (guiItem item : pageChangersBackward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+    }
+
+    /**
+     * Changes the Material and Name of the items used to change between pages
+     * @param mat Material of the items
+     * @param nameArgs <b>[Optional</b> 1 - Name of the nextPage Item \n 2 - Name of the prevPage item
+     */
+    public void setPageChangeItems(Material mat, String... nameArgs) {
+        if (nameArgs != null && nameArgs.length >= 2) {
+            nextPageName = nameArgs[0];
+            prevPageName = nameArgs[1];
+        }
+        nextPageMat = mat;
+        // Update the existing pageChangers
+        for (guiItem item : pageChangersForward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+        prevPageMat = mat;
+        for (guiItem item : pageChangersBackward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[1]);
+            }
+        }
     }
 
     /**

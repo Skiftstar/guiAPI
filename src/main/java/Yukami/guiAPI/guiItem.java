@@ -212,7 +212,7 @@ public class guiItem {
      * Updates the item name
      * @param name - New name of the item
      */
-    public void updateName(String name) {
+    public void setName(String name) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
         im.setDisplayName(Util.Color(name));
