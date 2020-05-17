@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.*;
 
 public class guiWindow implements Listener {
@@ -35,10 +36,11 @@ public class guiWindow implements Listener {
 
     /**
      * Creates a Window (an inventory) that can be further customized
-     * @param p Player of that the inv will be opened to
-     * @param name title of the inventory
-     * @param rows Amount of rows, min. 1, max. 6
-     * @param type WindowType, normal or split
+     *
+     * @param p      Player of that the inv will be opened to
+     * @param name   title of the inventory
+     * @param rows   Amount of rows, min. 1, max. 6
+     * @param type   WindowType, normal or split
      * @param plugin Plugin reference
      */
     public guiWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
@@ -58,9 +60,10 @@ public class guiWindow implements Listener {
     /**
      * adds an ItemStack to the inventory or to a specific window.
      * If an item is in the same slot as this item it gets replaced.
-     * @param mat Material of the Item
-     * @param name Name of the Item
-     * @param slot Slot the item is in (does not work if a border item is on that slot)
+     *
+     * @param mat      Material of the Item
+     * @param name     Name of the Item
+     * @param slot     Slot the item is in (does not work if a border item is on that slot)
      * @param pageArgs <b>[Optional]</b> page that the item will be on (enable pages first!)
      * @return Returns the created <b>guiItem</b>
      */
@@ -112,8 +115,9 @@ public class guiWindow implements Listener {
 
     /**
      * Adds an item to the inventory or a specific page (if one is provided)
-     * @param mat Material of the Item
-     * @param name Name of the Item
+     *
+     * @param mat      Material of the Item
+     * @param name     Name of the Item
      * @param pageArgs <b>[Optional]</b> page the item will be on (enable pages first!)
      * @return the created Item
      */
@@ -174,6 +178,7 @@ public class guiWindow implements Listener {
 
     /**
      * Returns the next free slot in the entire inventory or on a specific page (if pages are enabled)
+     *
      * @param pageArgs <b>[Optional]</b> page you want to get the next free slot of
      * @return the next free slot or -1 if the inv/page is full
      */
@@ -201,37 +206,44 @@ public class guiWindow implements Listener {
     }
 
     private void addNewPage() {
-        guiItem moveForward1, moveForward2;
+        guiItem moveForward;
+        guiItem[] page = pages.get(pages.size());
         if (pages.size() == 1) {
-            guiItem[] page = pages.get(1);
-            moveForward1 = page[slots -1];
-            guiItem pageForward = nextPageName == null ? new guiItem(this, nextPageMat, slots - 1) : new guiItem(this, nextPageMat, nextPageName, slots - 1);
-            pageForward.setOnClick(e -> {
-                changePage(currPage + 1);
-            });
-            pageChangersForward.add(pageForward);
-            clickableItems.put(pageForward.getItemStack(), pageForward);
-            page[slots - 1] = pageForward;
-            pages.replace(1, pages.get(1), page);
-            guiItem[] newPage = new guiItem[slots];
-            newPage[0] = moveForward1;
-            guiItem pageBack = nextPageName == null ? new guiItem(this, prevPageMat, slots - 1) : new guiItem(this, prevPageMat, prevPageName, slots - 1);
-            pageForward.setOnClick(e -> {
-                changePage(currPage - 1);
-            });
-            pageChangersBackward.add(pageBack);
-            clickableItems.put(pageBack.getItemStack(), pageBack);
-            newPage[slots -1] = pageBack;
-            pages.put(2, newPage);
+            moveForward = page[slots - 1];
+        } else {
+            moveForward = page[slots - 2];
         }
+        guiItem pageForward = nextPageName == null ? new guiItem(this, nextPageMat, slots - 1) : new guiItem(this, nextPageMat, nextPageName, slots - 1);
+        pageForward.setOnClick(e -> {
+            changePage(currPage + 1);
+        });
+        pageChangersForward.add(pageForward);
+        clickableItems.put(pageForward.getItemStack(), pageForward);
+        if (pages.size() > 1) {
+            guiItem oldBack = page[slots - 1];
+            page[slots - 2] = oldBack;
+        }
+        page[slots - 1] = pageForward;
+        pages.replace(pages.size(), pages.get(pages.size()), page);
+        guiItem[] newPage = new guiItem[slots];
+        newPage[0] = moveForward;
+        guiItem pageBack = nextPageName == null ? new guiItem(this, prevPageMat, slots - 1) : new guiItem(this, prevPageMat, prevPageName, slots - 1);
+        pageForward.setOnClick(e -> {
+            changePage(currPage - 1);
+        });
+        pageChangersBackward.add(pageBack);
+        clickableItems.put(pageBack.getItemStack(), pageBack);
+        newPage[slots - 1] = pageBack;
+        pages.put(pages.size() + 1, newPage);
     }
 
     /**
      * Opens the specified page
+     *
      * @param page Page to open
      */
     public void changePage(int page) {
-
+        currPage = page;
     }
 
     /*
@@ -240,6 +252,12 @@ public class guiWindow implements Listener {
     private void invSetup() {
         //Handles all the Items added by the user
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
+        if (usePages) {
+            for (guiItem is : pages.get(1)) {
+                inv.setItem(is.getSlot(), is.getItemStack());
+            }
+            return;
+        }
         for (ItemStack is : clickableItems.keySet()) {
             guiItem item = clickableItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
@@ -260,6 +278,7 @@ public class guiWindow implements Listener {
 
     /**
      * Enables Page view which allows more items than you can fit in one inventory per guiWindow
+     *
      * @param enabled if pages should be enabled
      */
     public void setPagesEnabled(boolean enabled) {
@@ -272,7 +291,8 @@ public class guiWindow implements Listener {
     /**
      * Sets the items that are used for the border if the WindowType is Split_2
      * Default Item is White Stained Glass Pane
-     * @param mat Material of the border items
+     *
+     * @param mat      Material of the border items
      * @param nameArgs <b>[Optional]</b> Name of the border Items (use " " if you want no name)
      */
     public void setBorderInv(Material mat, String... nameArgs) {
@@ -284,7 +304,8 @@ public class guiWindow implements Listener {
 
     /**
      * Sets the items that fill the empty slots in the inventory
-     * @param mat Material of the fill items
+     *
+     * @param mat      Material of the fill items
      * @param nameArgs <b>[Optional]</b> Name of the Fill (use " " if you want no name)
      */
     public void setFillInv(Material mat, String... nameArgs) {
@@ -297,7 +318,8 @@ public class guiWindow implements Listener {
 
     /**
      * Sets the Material and the name of the item used to go a page forward
-     * @param mat Material of the Item
+     *
+     * @param mat      Material of the Item
      * @param nameArgs <b>[Optional]</b> name of the item
      */
     public void setNextPageItem(Material mat, String... nameArgs) {
@@ -316,7 +338,8 @@ public class guiWindow implements Listener {
 
     /**
      * Sets the Material and name of the item used to go a page back
-     * @param mat Material of the Item
+     *
+     * @param mat      Material of the Item
      * @param nameArgs <b>[Optional]</b> name of the item
      */
     public void setPrevPageItem(Material mat, String... nameArgs) {
@@ -335,7 +358,8 @@ public class guiWindow implements Listener {
 
     /**
      * Changes the Material and Name of the items used to change between pages
-     * @param mat Material of the items
+     *
+     * @param mat      Material of the items
      * @param nameArgs <b>[Optional</b> 1 - Name of the nextPage Item \n 2 - Name of the prevPage item
      */
     public void setPageChangeItems(Material mat, String... nameArgs) {
@@ -448,7 +472,6 @@ public class guiWindow implements Listener {
     }
 
     /**
-     *
      * @return the inventory
      */
     public Inventory getInv() {

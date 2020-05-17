@@ -11,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="15125" />
+    <option name="totalTimeSeconds" value="15717" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -33,7 +33,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -130,11 +130,11 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589724834910" />
-    <state x="440" y="129" key="SettingsEditor" timestamp="1589717220540">
+    <state x="440" y="129" key="SettingsEditor" timestamp="1589729887428">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
-    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717220540" />
+    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589729887428" />
     <state x="342" y="250" key="new project wizard" timestamp="1587639150505">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -143,9 +143,9 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="712" y="358" width="621" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589717219792" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589721943317">
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1589729698907">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589721943317" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589729698907" />
   </component>
 </project>
