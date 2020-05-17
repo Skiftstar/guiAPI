@@ -58,6 +58,166 @@ public class guiWindow implements Listener {
         inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
     }
 
+    /*
+    ========================================================
+                Accessible by package
+    ========================================================
+     */
+
+    /**
+     * opens in the inventory
+     */
+    void open() {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        updateInventory();
+        if (fill) {
+            fillInv();
+        }
+        p.openInventory(inv);
+    }
+
+
+    /**
+     * Fills the empty slots of the inventory with the preassigned item
+     */
+    void fillInv() {
+        ItemStack is = new ItemStack(fillMat);
+        if (fillName != null) {
+            ItemMeta im = is.getItemMeta();
+            im.setDisplayName(fillName);
+            is.setItemMeta(im);
+        }
+        for (int i = 0; i < inv.getSize(); i++) {
+            try {
+                if (inv.getItem(i) == null || inv.getItem(i).getType().equals(Material.AIR)) {
+                    inv.setItem(i, is);
+                }
+            } catch (NullPointerException e) {
+                inv.setItem(i, is);
+            }
+        }
+    }
+
+    /*
+    ========================================================
+            Customization (Setter Methods)
+    ========================================================
+     */
+
+    /**
+     * Enables Page view which allows more items than you can fit in one inventory per guiWindow
+     *
+     * @param enabled if pages should be enabled
+     */
+    public void setPagesEnabled(boolean enabled) {
+        usePages = enabled;
+        if (pages.size() == 0) {
+            pages.put(1, new guiItem[slots]);
+        }
+    }
+
+    /**
+     * Sets the items that are used for the border if the WindowType is Split_2
+     * Default Item is White Stained Glass Pane
+     *
+     * @param mat      Material of the border items
+     * @param nameArgs <b>[Optional]</b> Name of the border Items (use " " if you want no name)
+     */
+    public void setBorderInv(Material mat, String... nameArgs) {
+        borderMat = mat;
+        if (nameArgs != null) {
+            borderName = nameArgs[0];
+        }
+    }
+
+    /**
+     * Sets the items that fill the empty slots in the inventory
+     *
+     * @param mat      Material of the fill items
+     * @param nameArgs <b>[Optional]</b> Name of the Fill (use " " if you want no name)
+     */
+    public void setFillInv(Material mat, String... nameArgs) {
+        fill = true;
+        if (nameArgs != null) {
+            fillName = Util.Color(nameArgs[0]);
+        }
+        fillMat = mat;
+    }
+
+    /**
+     * Sets the Material and the name of the item used to go a page forward
+     *
+     * @param mat      Material of the Item
+     * @param nameArgs <b>[Optional]</b> name of the item
+     */
+    public void setNextPageItem(Material mat, String... nameArgs) {
+        if (nameArgs != null) {
+            nextPageName = nameArgs[0];
+        }
+        nextPageMat = mat;
+        // Update Existing Page Changers
+        for (guiItem item : pageChangersForward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+    }
+
+    /**
+     * Sets the Material and name of the item used to go a page back
+     *
+     * @param mat      Material of the Item
+     * @param nameArgs <b>[Optional]</b> name of the item
+     */
+    public void setPrevPageItem(Material mat, String... nameArgs) {
+        if (nameArgs != null) {
+            prevPageName = nameArgs[0];
+        }
+        prevPageMat = mat;
+        // Update existing PageChangers
+        for (guiItem item : pageChangersBackward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+    }
+
+    /**
+     * Changes the Material and Name of the items used to change between pages
+     *
+     * @param mat      Material of the items
+     * @param nameArgs <b>[Optional</b> 1 - Name of the nextPage Item \n 2 - Name of the prevPage item
+     */
+    public void setPageChangeItems(Material mat, String... nameArgs) {
+        if (nameArgs != null && nameArgs.length >= 2) {
+            nextPageName = nameArgs[0];
+            prevPageName = nameArgs[1];
+        }
+        nextPageMat = mat;
+        // Update the existing pageChangers
+        for (guiItem item : pageChangersForward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[0]);
+            }
+        }
+        prevPageMat = mat;
+        for (guiItem item : pageChangersBackward) {
+            item.setMaterial(mat);
+            if (nameArgs != null) {
+                item.setName(nameArgs[1]);
+            }
+        }
+    }
+
+    /*
+    ========================================================
+                    User Accessible
+    ========================================================
+     */
+
     /**
      * adds an ItemStack to the inventory or to a specific window.
      * If an item is in the same slot as this item it gets replaced.
@@ -213,6 +373,48 @@ public class guiWindow implements Listener {
         return inv.firstEmpty();
     }
 
+    /**
+     * Used to update the inventory.
+     * It will be cleared completely and then all items will be added back.
+     */
+    public void updateInventory() {
+        //Handles all the Items added by the user
+        inv.clear();
+        if (usePages) {
+            guiItem[] page = pages.get(currPage);
+            for (int i = 0; i < page.length; i++) {
+                if (page[i] == null) {
+                    continue;
+                }
+                page[i].setSlot(i);
+                inv.setItem(i, page[i].getItemStack());
+            }
+            return;
+        }
+        for (ItemStack is : clickableItems.keySet()) {
+            guiItem item = clickableItems.get(is);
+            inv.setItem(item.getSlot(), item.getItemStack());
+        }
+        if (type.equals(WindowType.SPLIT_2)) {
+            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
+            if (borderName != null) {
+                ItemMeta im = borderItem.getItemMeta();
+                im.setDisplayName(borderName);
+                borderItem.setItemMeta(im);
+            }
+            for (int i = 0; i < rows; i++) {
+                int slot = 4 + i * 9;
+                inv.setItem(slot, borderItem);
+            }
+        }
+    }
+
+    /*
+    ========================================================
+                    Page Related
+    ========================================================
+     */
+
     private void addNewPage() {
         guiItem moveForward;
         guiItem[] page = pages.get(pages.size());
@@ -262,10 +464,12 @@ public class guiWindow implements Listener {
      * @param page Page to open
      */
     public void changePage(int page) {
+        // Checks if pages are actually enabled
         if (!usePages) {
             System.out.println("&c[guiAPI] There was an attempt to change pages but pages aren't enabled yet!\n&cMake sure to enable them before using any related methods!");
             return;
         }
+        // Checks for monkey input
         if (page < 1 || page > pages.size()) {
             System.out.println("&c[guiAPI] There was an attempt to change to a page that doesn't exist!\n&cRemember that Pages start at 1 !");
             return;
@@ -274,213 +478,11 @@ public class guiWindow implements Listener {
         updateInventory();
     }
 
-    public void updateInventory() {
-        //Handles all the Items added by the user
-        inv.clear();
-        if (usePages) {
-            guiItem[] page = pages.get(currPage);
-            for (int i = 0; i < page.length; i++) {
-                if (page[i] == null) {
-                    continue;
-                }
-                page[i].setSlot(i);
-                inv.setItem(i, page[i].getItemStack());
-            }
-            return;
-        }
-        for (ItemStack is : clickableItems.keySet()) {
-            guiItem item = clickableItems.get(is);
-            inv.setItem(item.getSlot(), item.getItemStack());
-        }
-        if (type.equals(WindowType.SPLIT_2)) {
-            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
-            if (borderName != null) {
-                ItemMeta im = borderItem.getItemMeta();
-                im.setDisplayName(borderName);
-                borderItem.setItemMeta(im);
-            }
-            for (int i = 0; i < rows; i++) {
-                int slot = 4 + i * 9;
-                inv.setItem(slot, borderItem);
-            }
-        }
-    }
-
     /*
-     * creates the inventory and adds all items to it
+    ========================================================
+                    Event Handler Related
+    ========================================================
      */
-    private void invSetup() {
-        //Handles all the Items added by the user
-        inv = Bukkit.createInventory(p, rows * 9, Util.Color(name));
-        if (usePages) {
-            System.out.println(pages.size() + "\n" + pages.get(1).length);
-            for (guiItem is : pages.get(1)) {
-                if (is == null) {
-                    continue;
-                }
-                inv.setItem(is.getSlot(), is.getItemStack());
-            }
-            return;
-        }
-        for (ItemStack is : clickableItems.keySet()) {
-            guiItem item = clickableItems.get(is);
-            inv.setItem(item.getSlot(), item.getItemStack());
-        }
-        if (type.equals(WindowType.SPLIT_2)) {
-            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
-            if (borderName != null) {
-                ItemMeta im = borderItem.getItemMeta();
-                im.setDisplayName(borderName);
-                borderItem.setItemMeta(im);
-            }
-            for (int i = 0; i < rows; i++) {
-                int slot = 4 + i * 9;
-                inv.setItem(slot, borderItem);
-            }
-        }
-    }
-
-    /**
-     * Enables Page view which allows more items than you can fit in one inventory per guiWindow
-     *
-     * @param enabled if pages should be enabled
-     */
-    public void setPagesEnabled(boolean enabled) {
-        usePages = enabled;
-        if (pages.size() == 0) {
-            pages.put(1, new guiItem[slots]);
-        }
-    }
-
-    /**
-     * Sets the items that are used for the border if the WindowType is Split_2
-     * Default Item is White Stained Glass Pane
-     *
-     * @param mat      Material of the border items
-     * @param nameArgs <b>[Optional]</b> Name of the border Items (use " " if you want no name)
-     */
-    public void setBorderInv(Material mat, String... nameArgs) {
-        borderMat = mat;
-        if (nameArgs != null) {
-            borderName = nameArgs[0];
-        }
-    }
-
-    /**
-     * Sets the items that fill the empty slots in the inventory
-     *
-     * @param mat      Material of the fill items
-     * @param nameArgs <b>[Optional]</b> Name of the Fill (use " " if you want no name)
-     */
-    public void setFillInv(Material mat, String... nameArgs) {
-        fill = true;
-        if (nameArgs != null) {
-            fillName = Util.Color(nameArgs[0]);
-        }
-        fillMat = mat;
-    }
-
-    /**
-     * Sets the Material and the name of the item used to go a page forward
-     *
-     * @param mat      Material of the Item
-     * @param nameArgs <b>[Optional]</b> name of the item
-     */
-    public void setNextPageItem(Material mat, String... nameArgs) {
-        if (nameArgs != null) {
-            nextPageName = nameArgs[0];
-        }
-        nextPageMat = mat;
-        // Update Existing Page Changers
-        for (guiItem item : pageChangersForward) {
-            item.setMaterial(mat);
-            if (nameArgs != null) {
-                item.setName(nameArgs[0]);
-            }
-        }
-    }
-
-    /**
-     * Sets the Material and name of the item used to go a page back
-     *
-     * @param mat      Material of the Item
-     * @param nameArgs <b>[Optional]</b> name of the item
-     */
-    public void setPrevPageItem(Material mat, String... nameArgs) {
-        if (nameArgs != null) {
-            prevPageName = nameArgs[0];
-        }
-        prevPageMat = mat;
-        // Update existing PageChangers
-        for (guiItem item : pageChangersBackward) {
-            item.setMaterial(mat);
-            if (nameArgs != null) {
-                item.setName(nameArgs[0]);
-            }
-        }
-    }
-
-    /**
-     * Changes the Material and Name of the items used to change between pages
-     *
-     * @param mat      Material of the items
-     * @param nameArgs <b>[Optional</b> 1 - Name of the nextPage Item \n 2 - Name of the prevPage item
-     */
-    public void setPageChangeItems(Material mat, String... nameArgs) {
-        if (nameArgs != null && nameArgs.length >= 2) {
-            nextPageName = nameArgs[0];
-            prevPageName = nameArgs[1];
-        }
-        nextPageMat = mat;
-        // Update the existing pageChangers
-        for (guiItem item : pageChangersForward) {
-            item.setMaterial(mat);
-            if (nameArgs != null) {
-                item.setName(nameArgs[0]);
-            }
-        }
-        prevPageMat = mat;
-        for (guiItem item : pageChangersBackward) {
-            item.setMaterial(mat);
-            if (nameArgs != null) {
-                item.setName(nameArgs[1]);
-            }
-        }
-    }
-
-    /**
-     * opens in the inventory
-     */
-    void open() {
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        invSetup();
-        if (fill) {
-            fillInv();
-        }
-        p.openInventory(inv);
-    }
-
-
-    /**
-     * Fills the empty slots of the inventory with the preassigned item
-     */
-    void fillInv() {
-        ItemStack is = new ItemStack(fillMat);
-        if (fillName != null) {
-            ItemMeta im = is.getItemMeta();
-            im.setDisplayName(fillName);
-            is.setItemMeta(im);
-        }
-        for (int i = 0; i < inv.getSize(); i++) {
-            try {
-                if (inv.getItem(i) == null || inv.getItem(i).getType().equals(Material.AIR)) {
-                    inv.setItem(i, is);
-                }
-            } catch (NullPointerException e) {
-                inv.setItem(i, is);
-            }
-        }
-    }
 
     /**
      * Unregisters the window from the Listeners so that the reference can be dumped
@@ -534,6 +536,12 @@ public class guiWindow implements Listener {
         }
         HandlerList.unregisterAll(this);
     }
+
+    /*
+    ==========================================
+                Get Methods
+    ==========================================
+     */
 
     /**
      * @return the inventory
