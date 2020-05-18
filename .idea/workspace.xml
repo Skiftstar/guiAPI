@@ -8,6 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="29710" />
+    <option name="totalTimeSeconds" value="30117" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -138,11 +142,11 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state width="938" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589795054311" />
-    <state x="440" y="129" key="SettingsEditor" timestamp="1589748501915">
+    <state x="433" y="229" key="SettingsEditor" timestamp="1589800435766">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
-    <state x="440" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589733611815" />
+    <state x="433" y="229" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589800435766" />
     <state x="440" y="129" key="SettingsEditor/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501915" />
     <state x="342" y="250" key="new project wizard" timestamp="1587639150505">
       <screen x="0" y="30" width="1920" height="1050" />
