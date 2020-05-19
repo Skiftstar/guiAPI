@@ -30,6 +30,12 @@ public class Page {
         items = new guiItem[slots];
     }
 
+    /*
+    ========================================================
+                User Accessible
+    ========================================================
+     */
+
     /**
      * Creates a page with already given items
      * @param slots slots on the page, changing this from the slots the window has causes errors!!
@@ -96,7 +102,7 @@ public class Page {
         int slot;
         if (slotArgs.length > 0) {
             slot = slotArgs[0];
-            System.out.println("slot: " + slot);
+            // Check for monkey input
             if (slot < 0 || slot > slots - 1) {
                 System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an item to a slot that is out of bounds!\nItem was not added!"));
                 return;
@@ -104,7 +110,9 @@ public class Page {
             if (items[slot] != null) {
                 removeItem(slot);
             }
-        } else {
+        }
+        // No slot provided, just use the next free one
+        else {
             slot = getNextFree();
             if (slot == -1) {
                 System.out.println(Util.Color("&c[guiAPI] There was an attemp to add an item to a page that is full!\n&cThe item was not added!"));
@@ -122,8 +130,10 @@ public class Page {
      * @param slot slot to move to
      */
     public void moveItem(guiItem item, int slot) {
+        // Set old slot empty
         items[item.getSlot()] = null;
         changedSlots.add(item.getSlot());
+        // Add item to new slot
         items[slot] = item;
         item.setSlot(slot);
         changedSlots.add(slot);
@@ -205,8 +215,20 @@ public class Page {
         checkUpdate();
     }
 
+    /*
+    ========================================================
+                    Private Methods
+    ========================================================
+     */
+
     private void checkUpdate() {
+        /*
+        Make a new List and just copy the values from the old List
+        Because java is a piece of crap and just isn't fast enough to keep up with my
+        cookie clicker skills
+         */
         final List<Integer> temp = new ArrayList<>(changedSlots);
+        // Then just make room for the next slot changes
         changedSlots.clear();
         if (window.getCurrPage() != pageNr || temp.size() == 0) {
             return;

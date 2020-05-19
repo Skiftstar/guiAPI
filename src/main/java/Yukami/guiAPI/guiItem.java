@@ -86,7 +86,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         im.setLore(lore);
         is.setItemMeta(im);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
     }
 
@@ -100,7 +100,7 @@ public class guiItem {
             im.setLore(null);
         }
         is.setItemMeta(im);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
     }
 
@@ -120,7 +120,7 @@ public class guiItem {
         currLore.add(lore);
         im.setLore(currLore);
         is.setItemMeta(im);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
     }
 
@@ -147,7 +147,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
     }
 
     /**
@@ -175,7 +175,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
     }
 
     /*
@@ -193,7 +193,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         im.setDisplayName(Util.Color(name));
         is.setItemMeta(im);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
     }
 
@@ -203,7 +203,7 @@ public class guiItem {
      */
     public void setSlot(int slot) {
         this.slot = slot;
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
     }
 
     /**
@@ -214,7 +214,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setType(mat);
         window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
     }
 
     /**
@@ -231,7 +231,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setAmount(count);
         window.clickableItems.put(is, this);
-        inv.setItem(slot, is);
+        //inv.setItem(slot, is);
     }
 
     //Only private for now, will change later so that items can be moved around
