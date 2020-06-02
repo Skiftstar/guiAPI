@@ -46,7 +46,7 @@ public class guiItem {
     }
 
     guiItem(guiWindow window, ItemStack is, int slot) {
-        this.is = is;
+        this.is = new ItemStack(is);
         this.slot = slot;
         this.window = window;
     }
