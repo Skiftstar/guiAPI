@@ -122,7 +122,7 @@ public class guiItem {
         if (addToBeginning.length == 0 || !addToBeginning[0]) {
             currLore.add(lore);
         }
-        if (addToBeginning[0]) {
+        if (addToBeginning.length > 0 && addToBeginning[0]) {
             currLore.add(0, lore);
         }
         im.setLore(currLore);
