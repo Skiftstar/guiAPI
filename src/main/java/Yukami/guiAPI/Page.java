@@ -61,7 +61,7 @@ public class Page {
             }
             if (items[i].equals(item)) {
                 items[i] = null;
-                window.clickableItems.remove(items[i].getItemStack());
+                window.clickableItems.remove(item.getItemStack());
                 changedSlots.add(i);
             }
         }
@@ -74,9 +74,12 @@ public class Page {
      */
     public void removeItem(ItemStack is) {
         for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                continue;
+            }
             if (items[i].getItemStack().equals(is)) {
-                items[i] = null;
                 window.clickableItems.remove(items[i].getItemStack());
+                items[i] = null;
                 changedSlots.add(i);
             }
         }
