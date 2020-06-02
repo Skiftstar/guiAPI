@@ -569,4 +569,8 @@ public class guiWindow implements Listener {
     public int getPageCount() {
         return usePages ? pages.size() : -1;
     }
+
+    public Page getPage(int pageNum) {
+        return pages.size() < pageNum ? null : pages.get(pageNum);
+    }
 }

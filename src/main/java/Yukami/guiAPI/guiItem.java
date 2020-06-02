@@ -89,6 +89,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -103,6 +104,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -129,7 +131,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
-
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -155,7 +157,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        //inv.setItem(slot, is);
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -183,7 +185,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        //inv.setItem(slot, is);
+        window.getPage(page).checkUpdate();
     }
 
     /*
@@ -203,6 +205,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -222,7 +225,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setType(mat);
         window.clickableItems.put(is, this);
-        //inv.setItem(slot, is);
+        window.getPage(page).checkUpdate();
     }
 
     /**
@@ -239,7 +242,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setAmount(count);
         window.clickableItems.put(is, this);
-        //inv.setItem(slot, is);
+        window.getPage(page).checkUpdate();
     }
 
     //Only private for now, will change later so that items can be moved around

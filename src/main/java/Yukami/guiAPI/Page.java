@@ -228,7 +228,7 @@ public class Page {
     ========================================================
      */
 
-    private void checkUpdate() {
+    void checkUpdate() {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 window.getInv().setItem(i, new ItemStack(Material.AIR));
