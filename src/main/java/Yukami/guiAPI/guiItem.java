@@ -313,6 +313,6 @@ public class guiItem {
     }
 
     public List<String> getLore() {
-        return is.getItemMeta().hasLore() ? is.getItemMeta().getLore() : null;
+        return is.getItemMeta().hasLore() ? is.getItemMeta().getLore() : new ArrayList<>();
     }
 }
