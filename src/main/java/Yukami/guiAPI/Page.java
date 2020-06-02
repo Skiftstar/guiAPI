@@ -224,11 +224,14 @@ public class Page {
 
     private void checkUpdate() {
         for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {window.getInv().setItem(i, new ItemStack(Material.AIR));}
+            if (items[i] == null) {
+                window.getInv().setItem(i, new ItemStack(Material.AIR));
+                continue;
+            }
             window.getInv().setItem(i, items[i].getItemStack());
         }
         changedSlots.clear();
-        
+
 
         /*
         Make a new List and just copy the values from the old List
