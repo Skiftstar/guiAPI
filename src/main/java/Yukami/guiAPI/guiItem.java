@@ -48,6 +48,12 @@ public class guiItem {
         ItemMeta im = is.getItemMeta();
     }
 
+    guiItem(guiWindow window, ItemStack is, int slot) {
+        this.is = is;
+        this.slot = slot;
+        this.window = window;
+    }
+
     /**
      * same as other constructor, but without item amount, amount will be 1
      */

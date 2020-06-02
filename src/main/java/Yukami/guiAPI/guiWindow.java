@@ -230,6 +230,66 @@ public class guiWindow implements Listener {
         playerInvClickFunction = func;
     }
 
+    public guiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
+        guiItem item;
+        Page page;
+        if (pageArgs.length > 0) {
+            // Prevents saving Items where they won't be used
+            if (!usePages) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
+                return null;
+            }
+            int pageNr = pageArgs[0];
+            // If the page doesn't exist yet
+            if (pages.size() < pageNr || pageNr <= 0) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
+                return null;
+            }
+            // Get the page
+            page = pages.get(pageNr);
+        } else {
+            page = pages.get(1);
+        }
+        // Create the item and add it to the page if a page is provided.
+        item = new guiItem(this, is, slot);
+        page.addItem(item, slot);
+        return item;
+    }
+
+    public guiItem addItemStack(ItemStack is, Integer... pageArgs) {
+        guiItem item;
+        Page page;
+        int pageNr;
+        if (pageArgs.length > 0) {
+            // Possible Errors
+            if (!usePages) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
+                return null;
+            }
+            pageNr = pageArgs[0];
+            if (pages.size() < pageNr || pageNr <= 0) {
+                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
+                return null;
+            }
+            page = pages.get(pageNr);
+        } else {
+            // If no page is provided but pages are used
+            if (usePages) {
+                //check if the current page is full, if so add a new one
+                if (pages.get(pages.size()).getNextFree() == -1) {
+                    addNewPage();
+                }
+                page = pages.get(pages.size());
+            } else {
+                page = pages.get(1);
+            }
+        }
+        item = new guiItem(this, is, page.getNextFree());
+        page.addItem(item, page.getNextFree());
+        pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
+        return item;
+    }
+
     /**
      * adds an ItemStack to the inventory or to a specific window.
      * If an item is in the same slot as this item it gets replaced.
