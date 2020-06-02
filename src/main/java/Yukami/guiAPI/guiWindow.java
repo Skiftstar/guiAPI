@@ -252,6 +252,7 @@ public class guiWindow implements Listener {
         }
         // Create the item and add it to the page if a page is provided.
         item = new guiItem(this, is, slot);
+        item.setPage(page.getPageNr());
         page.addItem(item, slot);
         return item;
     }
@@ -291,6 +292,7 @@ public class guiWindow implements Listener {
             }
         }
         item = new guiItem(this, is, page.getNextFree());
+        item.setPage(page.getPageNr());
         page.addItem(item, page.getNextFree());
         pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
         return item;
@@ -328,6 +330,7 @@ public class guiWindow implements Listener {
         }
         // Create the item and add it to the page if a page is provided.
         item = new guiItem(this, mat, name, slot);
+        item.setPage(page.getPageNr());
         page.addItem(item, slot);
         return item;
     }
@@ -369,6 +372,7 @@ public class guiWindow implements Listener {
             }
         }
         item = new guiItem(this, mat, name, page.getNextFree());
+        item.setPage(page.getPageNr());
         page.addItem(item, page.getNextFree());
         pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
         return item;
