@@ -56,6 +56,9 @@ public class Page {
      */
     public void removeItem(guiItem item) {
         for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                continue;
+            }
             if (items[i].equals(item)) {
                 items[i] = null;
                 window.clickableItems.remove(items[i].getItemStack());
