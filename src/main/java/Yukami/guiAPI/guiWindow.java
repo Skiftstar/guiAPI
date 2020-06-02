@@ -256,6 +256,12 @@ public class guiWindow implements Listener {
         return item;
     }
 
+    public void removeItem(guiItem item) {
+        for (Page page : pages.values()) {
+            page.removeItem(item);
+        }
+    }
+
     public guiItem addItemStack(ItemStack is, Integer... pageArgs) {
         guiItem item;
         Page page;
