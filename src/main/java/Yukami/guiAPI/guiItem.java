@@ -82,7 +82,7 @@ public class guiItem {
      * Sets a preset Lore
      * @param lore - StringList with the pre set lore
      */
-    public void updateLore(List<String> lore) {
+    public void setLore(List<String> lore) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
         im.setLore(lore);
