@@ -311,4 +311,8 @@ public class guiItem {
     public int getPage() {
         return page;
     }
+
+    public List<String> getLore() {
+        return is.getItemMeta().hasLore() ? is.getItemMeta().getLore() : null;
+    }
 }
