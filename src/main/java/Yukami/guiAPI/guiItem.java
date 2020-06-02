@@ -107,9 +107,10 @@ public class guiItem {
 
     /**
      * Adds a single line to the Item lore
-     * @param lore - Line to be added
+     * @param lore Line to be added
+     * @param addToBeginning <br>Nullable</br> true if lore should be added to the beginning
      */
-    public void addLore(String lore) {
+    public void addLore(String lore, boolean... addToBeginning) {
         ItemMeta im = is.getItemMeta();
         window.clickableItems.remove(is);
         List<String> currLore;
@@ -118,11 +119,17 @@ public class guiItem {
         } else {
             currLore = new ArrayList<>();
         }
-        currLore.add(lore);
+        if (addToBeginning.length == 0 || !addToBeginning[0]) {
+            currLore.add(lore);
+        }
+        if (addToBeginning[0]) {
+            currLore.add(0, lore);
+        }
         im.setLore(currLore);
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
+
     }
 
     /**
