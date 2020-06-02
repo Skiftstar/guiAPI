@@ -2,6 +2,7 @@ package Yukami.guiAPI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -9,11 +10,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Lever;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class guiWindow implements Listener {
 
@@ -28,6 +32,7 @@ public class guiWindow implements Listener {
     Material fillMat = null, borderMat = null, nextPageMat = null, prevPageMat = null;
     String fillName = null, borderName = null, nextPageName = null, prevPageName = null;
     private List<guiItem> pageChangersForward = new ArrayList<>(), pageChangersBackward = new ArrayList<>();
+    private Consumer<InventoryClickEvent> playerInvClickFunction = null;
     private WindowType type;
     private int currPage = 1;
     private Map<Integer, Page> pages = new HashMap<>();
@@ -216,6 +221,14 @@ public class guiWindow implements Listener {
                     User Accessible
     ========================================================
      */
+
+    /**
+     * Sets the function that will be executed once the player clicks an item in his inventory
+     * @param func Function to be executed
+     */
+    public void setOnPlayerInvClick(Consumer<InventoryClickEvent> func) {
+        playerInvClickFunction = func;
+    }
 
     /**
      * adds an ItemStack to the inventory or to a specific window.
@@ -426,11 +439,16 @@ public class guiWindow implements Listener {
         if (clicked == null) {
             return;
         }
+
         if (!e.getWhoClicked().equals(p)) {
             return;
         }
         if (clicked.equals(p.getInventory())) {
-            e.setCancelled(true);
+            if (playerInvClickFunction == null) {
+                e.setCancelled(true);
+            } else {
+                playerInvClickFunction.accept(e);
+            }
             return;
         }
         if (e.getAction().equals(InventoryAction.HOTBAR_SWAP)) {
