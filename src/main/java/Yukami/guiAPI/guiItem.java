@@ -52,6 +52,7 @@ public class guiItem {
         this.is = is;
         this.slot = slot;
         this.window = window;
+        this.inv = window.getInv();
     }
 
     /**
@@ -74,6 +75,7 @@ public class guiItem {
         this.window = window;
         this.inv = window.getInv();
         this.slot = slot;
+        this.inv = window.getInv();
         is = new ItemStack(mat);
     }
 
