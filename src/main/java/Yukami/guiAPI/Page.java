@@ -115,7 +115,8 @@ public class Page {
         else {
             slot = getNextFree();
             if (slot == -1) {
-                System.out.println(Util.Color("&c[guiAPI] There was an attemp to add an item to a page that is full!\n&cThe item was not added!"));
+                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an item to a page that is full!\n&cThe item was not added!"));
+                return;
             }
         }
         items[slot] = item;
@@ -222,25 +223,32 @@ public class Page {
      */
 
     private void checkUpdate() {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {window.getInv().setItem(i, new ItemStack(Material.AIR));}
+            window.getInv().setItem(i, items[i].getItemStack());
+        }
+        changedSlots.clear();
+        
+
         /*
         Make a new List and just copy the values from the old List
         Because java is a piece of crap and just isn't fast enough to keep up with my
         cookie clicker skills
          */
-        final List<Integer> temp = new ArrayList<>(changedSlots);
-        // Then just make room for the next slot changes
-        changedSlots.clear();
-        if (window.getCurrPage() != pageNr || temp.size() == 0) {
-            return;
-        }
-        for (int slot : temp) {
-            if (items[slot] != null) {
-                window.getInv().setItem(slot, items[slot].getItemStack());
-            } else {
-                window.getInv().setItem(slot, new ItemStack(Material.AIR));
-            }
-        }
-        temp.clear();
+//        final List<Integer> temp = new ArrayList<>(changedSlots);
+//        // Then just make room for the next slot changes
+//        changedSlots.clear();
+//        if (window.getCurrPage() != pageNr || temp.size() == 0) {
+//            return;
+//        }
+//        for (int slot : temp) {
+//            if (items[slot] != null) {
+//                window.getInv().setItem(slot, items[slot].getItemStack());
+//            } else {
+//                window.getInv().setItem(slot, new ItemStack(Material.AIR));
+//            }
+//        }
+//        temp.clear();
     }
 
     /*

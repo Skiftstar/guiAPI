@@ -16,7 +16,6 @@ public class guiItem {
     private Consumer<InventoryClickEvent> functionClick = null;
     private guiWindow window;
     private int slot;
-    private Inventory inv;
     private int page = -1;
 
     /**
@@ -29,7 +28,6 @@ public class guiItem {
      */
     guiItem(guiWindow window, Material mat, String name, int amount, int slot) {
         this.window = window;
-        this.inv = window.getInv();
         this.slot = slot;
         is = new ItemStack(mat, amount);
         ItemMeta im = is.getItemMeta();
@@ -42,7 +40,6 @@ public class guiItem {
      */
     guiItem(guiWindow window, Material mat, int amount, int slot) {
         this.window = window;
-        this.inv = window.getInv();
         this.slot = slot;
         is = new ItemStack(mat, amount);
         ItemMeta im = is.getItemMeta();
@@ -52,7 +49,6 @@ public class guiItem {
         this.is = is;
         this.slot = slot;
         this.window = window;
-        this.inv = window.getInv();
     }
 
     /**
@@ -60,7 +56,6 @@ public class guiItem {
      */
     guiItem(guiWindow window, Material mat, String name, int slot) {
         this.window = window;
-        this.inv = window.getInv();
         this.slot = slot;
         is = new ItemStack(mat);
         ItemMeta im = is.getItemMeta();
@@ -73,9 +68,7 @@ public class guiItem {
      */
     guiItem(guiWindow window, Material mat, int slot) {
         this.window = window;
-        this.inv = window.getInv();
         this.slot = slot;
-        this.inv = window.getInv();
         is = new ItemStack(mat);
     }
 
