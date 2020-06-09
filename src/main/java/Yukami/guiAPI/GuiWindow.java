@@ -2,7 +2,6 @@ package Yukami.guiAPI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -10,18 +9,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.Lever;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class guiWindow implements Listener {
+public class GuiWindow extends Window implements Listener {
 
-    Map<ItemStack, guiItem> clickableItems = new HashMap<>();
     private Inventory inv;
     private Player p;
     private int rows;
@@ -31,7 +27,7 @@ public class guiWindow implements Listener {
     private JavaPlugin plugin;
     Material fillMat = null, borderMat = null, nextPageMat = null, prevPageMat = null;
     String fillName = null, borderName = null, nextPageName = null, prevPageName = null;
-    private List<guiItem> pageChangersForward = new ArrayList<>(), pageChangersBackward = new ArrayList<>();
+    private List<GuiItem> pageChangersForward = new ArrayList<>(), pageChangersBackward = new ArrayList<>();
     private Consumer<InventoryClickEvent> playerInvClickFunction = null;
     private WindowType type;
     private int currPage = 1;
@@ -47,7 +43,7 @@ public class guiWindow implements Listener {
      * @param type   WindowType, normal or split
      * @param plugin Plugin reference
      */
-    public guiWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
+    public GuiWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
         this.p = p;
         this.name = name;
         this.plugin = plugin;
@@ -71,7 +67,7 @@ public class guiWindow implements Listener {
     /**
      * opens in the inventory
      */
-    void open() {
+    protected void open() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         updateInventory();
         if (fill) {
@@ -142,7 +138,7 @@ public class guiWindow implements Listener {
      */
     public void setFillInv(Material mat, String... nameArgs) {
         fill = true;
-        if (nameArgs != null) {
+        if (nameArgs.length > 0) {
             fillName = Util.Color(nameArgs[0]);
         }
         fillMat = mat;
@@ -160,7 +156,7 @@ public class guiWindow implements Listener {
         }
         nextPageMat = mat;
         // Update Existing Page Changers
-        for (guiItem item : pageChangersForward) {
+        for (GuiItem item : pageChangersForward) {
             item.setMaterial(mat);
             if (nameArgs != null) {
                 item.setName(nameArgs[0]);
@@ -180,7 +176,7 @@ public class guiWindow implements Listener {
         }
         prevPageMat = mat;
         // Update existing PageChangers
-        for (guiItem item : pageChangersBackward) {
+        for (GuiItem item : pageChangersBackward) {
             item.setMaterial(mat);
             if (nameArgs != null) {
                 item.setName(nameArgs[0]);
@@ -201,14 +197,14 @@ public class guiWindow implements Listener {
         }
         nextPageMat = mat;
         // Update the existing pageChangers
-        for (guiItem item : pageChangersForward) {
+        for (GuiItem item : pageChangersForward) {
             item.setMaterial(mat);
             if (nameArgs != null) {
                 item.setName(nameArgs[0]);
             }
         }
         prevPageMat = mat;
-        for (guiItem item : pageChangersBackward) {
+        for (GuiItem item : pageChangersBackward) {
             item.setMaterial(mat);
             if (nameArgs != null) {
                 item.setName(nameArgs[1]);
@@ -230,8 +226,8 @@ public class guiWindow implements Listener {
         playerInvClickFunction = func;
     }
 
-    public guiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
-        guiItem item;
+    public GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
+        GuiItem item;
         Page page;
         if (pageArgs.length > 0) {
             // Prevents saving Items where they won't be used
@@ -251,20 +247,20 @@ public class guiWindow implements Listener {
             page = pages.get(1);
         }
         // Create the item and add it to the page if a page is provided.
-        item = new guiItem(this, is, slot);
+        item = new GuiItem(this, is, slot);
         item.setPage(page.getPageNr());
         page.addItem(item, slot);
         return item;
     }
 
-    public void removeItem(guiItem item) {
+    public void removeItem(GuiItem item) {
         for (Page page : pages.values()) {
             page.removeItem(item);
         }
     }
 
-    public guiItem addItemStack(ItemStack is, Integer... pageArgs) {
-        guiItem item;
+    public GuiItem addItemStack(ItemStack is, Integer... pageArgs) {
+        GuiItem item;
         Page page;
         int pageNr;
         if (pageArgs.length > 0) {
@@ -291,7 +287,7 @@ public class guiWindow implements Listener {
                 page = pages.get(1);
             }
         }
-        item = new guiItem(this, is, page.getNextFree());
+        item = new GuiItem(this, is, page.getNextFree());
         item.setPage(page.getPageNr());
         page.addItem(item, page.getNextFree());
         pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
@@ -308,8 +304,8 @@ public class guiWindow implements Listener {
      * @param pageArgs <b>[Optional]</b> page that the item will be on (enable pages first!)
      * @return Returns the created <b>guiItem</b>
      */
-    public guiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
-        guiItem item;
+    public GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
+        GuiItem item;
         Page page;
         if (pageArgs.length > 0) {
             // Prevents saving Items where they won't be used
@@ -329,7 +325,7 @@ public class guiWindow implements Listener {
             page = pages.get(1);
         }
         // Create the item and add it to the page if a page is provided.
-        item = new guiItem(this, mat, name, slot);
+        item = new GuiItem(this, mat, name, slot);
         item.setPage(page.getPageNr());
         page.addItem(item, slot);
         return item;
@@ -343,8 +339,8 @@ public class guiWindow implements Listener {
      * @param pageArgs <b>[Optional]</b> page the item will be on (enable pages first!)
      * @return the created Item
      */
-    public guiItem addItemStack(Material mat, String name, Integer... pageArgs) {
-        guiItem item;
+    public GuiItem addItemStack(Material mat, String name, Integer... pageArgs) {
+        GuiItem item;
         Page page;
         int pageNr;
         if (pageArgs.length > 0) {
@@ -371,7 +367,7 @@ public class guiWindow implements Listener {
                 page = pages.get(1);
             }
         }
-        item = new guiItem(this, mat, name, page.getNextFree());
+        item = new GuiItem(this, mat, name, page.getNextFree());
         item.setPage(page.getPageNr());
         page.addItem(item, page.getNextFree());
         pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
@@ -402,7 +398,7 @@ public class guiWindow implements Listener {
         if (usePages) {
             // Get the currentPage, loop through the items, update their slots just in case and place them in the inv
             Page page = pages.get(currPage);
-            guiItem[] items = page.getItems();
+            GuiItem[] items = page.getItems();
             for (int i = 0; i < items.length; i++) {
                 if (items[i] == null) {
                     continue;
@@ -413,7 +409,7 @@ public class guiWindow implements Listener {
             return;
         }
         for (ItemStack is : clickableItems.keySet()) {
-            guiItem item = clickableItems.get(is);
+            GuiItem item = clickableItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
         }
         if (type.equals(WindowType.SPLIT_2)) {
@@ -438,7 +434,7 @@ public class guiWindow implements Listener {
 
     private void addNewPage() {
         // Get the item that blocks the pageSwapper
-        guiItem moveForward;
+        GuiItem moveForward;
         Page page = pages.get(pages.size());
         // This needs to be a special case because page 1 is the only page without "go Back 1 Page" Item
         if (pages.size() == 1) {
@@ -449,7 +445,7 @@ public class guiWindow implements Listener {
         // Again, special case because this would not work for Page 1
         // Just move the "Page Back" Item one slot to the left so that it fits the layout
         if (pages.size() > 1) {
-            guiItem oldBack = page.getPrevPageItem();
+            GuiItem oldBack = page.getPrevPageItem();
             page.moveItem(oldBack, slots - 2);
         }
         page.setNextPageItem();
@@ -503,8 +499,29 @@ public class guiWindow implements Listener {
         HandlerList.unregisterAll(this);
     }
 
+    @Override
+    public ItemStack[] getItems() {
+        return inv.getContents();
+    }
+
+    @Override
+    void update(int... PageArgs) {
+        if (PageArgs.length > 0 && PageArgs[0] != -1) {
+            for (int page : PageArgs) {
+                if (getPage(page) == null) {
+                    continue;
+                }
+                getPage(page).checkUpdate();
+            }
+        } else {
+            for (Page page : pages.values()) {
+                page.checkUpdate();
+            }
+        }
+    }
+
     @EventHandler
-    private void onInvClick(InventoryClickEvent e) {
+    protected void onInvClick(InventoryClickEvent e) {
         Inventory clicked = e.getClickedInventory();
         if (clicked == null) {
             return;
@@ -540,7 +557,7 @@ public class guiWindow implements Listener {
     }
 
     @EventHandler
-    private void onInvClose(InventoryCloseEvent e) {
+    protected void onInvClose(InventoryCloseEvent e) {
         if (!e.getPlayer().equals(p)) {
             return;
         }

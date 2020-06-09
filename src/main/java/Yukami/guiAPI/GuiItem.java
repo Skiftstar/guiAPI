@@ -3,18 +3,17 @@ package Yukami.guiAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class guiItem {
+public class GuiItem {
 
     private ItemStack is;
     private Consumer<InventoryClickEvent> functionClick = null;
-    private guiWindow window;
+    private Window window;
     private int slot;
     private int page = -1;
 
@@ -26,7 +25,7 @@ public class guiItem {
      * @param amount Amount of items in the ItemStack
      * @param slot slot the item will be put in
      */
-    guiItem(guiWindow window, Material mat, String name, int amount, int slot) {
+    GuiItem(Window window, Material mat, String name, int amount, int slot) {
         this.window = window;
         this.slot = slot;
         is = new ItemStack(mat, amount);
@@ -38,14 +37,14 @@ public class guiItem {
     /**
      * Same as other constructor, but without name. Name will be the material name
      */
-    guiItem(guiWindow window, Material mat, int amount, int slot) {
+    GuiItem(Window window, Material mat, int amount, int slot) {
         this.window = window;
         this.slot = slot;
         is = new ItemStack(mat, amount);
         ItemMeta im = is.getItemMeta();
     }
 
-    guiItem(guiWindow window, ItemStack is, int slot) {
+    GuiItem(Window window, ItemStack is, int slot) {
         this.is = new ItemStack(is);
         this.slot = slot;
         this.window = window;
@@ -54,7 +53,7 @@ public class guiItem {
     /**
      * same as other constructor, but without item amount, amount will be 1
      */
-    guiItem(guiWindow window, Material mat, String name, int slot) {
+    GuiItem(Window window, Material mat, String name, int slot) {
         this.window = window;
         this.slot = slot;
         is = new ItemStack(mat);
@@ -66,7 +65,7 @@ public class guiItem {
     /**
      * same as other constructors, but without name or amount, name will be item name, amount will be 1
      */
-    guiItem(guiWindow window, Material mat, int slot) {
+    GuiItem(GuiWindow window, Material mat, int slot) {
         this.window = window;
         this.slot = slot;
         is = new ItemStack(mat);
@@ -89,7 +88,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -104,7 +103,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -131,7 +130,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -157,7 +156,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -185,7 +184,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setItemMeta(im);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /*
@@ -205,7 +204,7 @@ public class guiItem {
         is.setItemMeta(im);
         //inv.setItem(slot, is);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -225,7 +224,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setType(mat);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     /**
@@ -242,7 +241,7 @@ public class guiItem {
         window.clickableItems.remove(is);
         is.setAmount(count);
         window.clickableItems.put(is, this);
-        window.getPage(page).checkUpdate();
+        window.update(page);
     }
 
     //Only private for now, will change later so that items can be moved around

@@ -7,14 +7,15 @@ Last Updated: April 21, 2020
  */
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GUI {
 
-    private guiWindow currWindow = null;
-    private List<guiWindow> windows = new ArrayList<>();
+    private Window currWindow = null;
+    private List<Window> windows = new ArrayList<>();
     private Player p;
     private JavaPlugin plugin;
 
@@ -35,8 +36,14 @@ public class GUI {
      * @param type WindowType, this determines the further look of the inventory
      * @return the created window
      */
-    public guiWindow createWindow(String name, int rows, WindowType type) {
-        guiWindow window = new guiWindow(p, name, rows, type, plugin);
+    public GuiWindow createWindow(String name, int rows, WindowType type) {
+        GuiWindow window = new GuiWindow(p, name, rows, type, plugin);
+        windows.add(window);
+        return window;
+    }
+
+    public AnvilWindow createAnvilWindow(String title) {
+        AnvilWindow window = new AnvilWindow(p, title, plugin);
         windows.add(window);
         return window;
     }
@@ -51,7 +58,7 @@ public class GUI {
      * Opens a specified window (inventory) for the player
      * @param window window to open
      */
-    public void open(guiWindow window) {
+    public void open(Window window) {
         if (currWindow != null) {
             currWindow.unregister();
         }
@@ -64,7 +71,7 @@ public class GUI {
      * Removes a window
      * @param window Window to be deleted
      */
-    public void removeWindows(guiWindow window) {
+    public void removeWindows(Window window) {
         window.delete();
         windows.remove(window);
     }
@@ -78,14 +85,14 @@ public class GUI {
     /**
      * @return all windows handled by this GUI
      */
-    public List<guiWindow> getWindows() {
+    public List<Window> getWindows() {
         return windows;
     }
 
     /**
      * @return The window that is currently open
      */
-    public guiWindow getCurrWindow() {
+    public Window getCurrWindow() {
         return currWindow;
     }
 }

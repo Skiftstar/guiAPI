@@ -7,7 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/AnvilWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/FakeAnvil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/Page.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/Page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiWindow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/guiWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +33,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="34659" />
+    <option name="totalTimeSeconds" value="41075" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -38,7 +56,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../private-stuff/ExatrionCore" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -90,19 +108,22 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="JavaDoc Changes" />
     <option name="LAST_COMMIT_MESSAGE" value="JavaDoc Changes" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1085" y="261" key="#com.intellij.ide.util.MemberChooser" timestamp="1591730768903">
+      <screen x="0" y="30" width="2560" height="1050" />
+    </state>
+    <state x="1085" y="261" key="#com.intellij.ide.util.MemberChooser/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1591730768903" />
     <state x="-1112" y="444" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1591093066274">
       <screen x="-1920" y="30" width="1920" height="1050" />
     </state>
@@ -122,9 +143,10 @@
     </state>
     <state x="827" y="109" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589633913296" />
     <state x="2534" y="145" key="CommitChangelistDialog2/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@1920.30.1920.1050" timestamp="1589622158899" />
-    <state x="740" y="309" key="FileChooserDialogImpl" timestamp="1589984343983">
-      <screen x="0" y="30" width="1920" height="1050" />
+    <state x="987" y="309" key="FileChooserDialogImpl" timestamp="1591731796450">
+      <screen x="0" y="30" width="2560" height="1050" />
     </state>
+    <state x="987" y="309" key="FileChooserDialogImpl/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1591731796450" />
     <state x="-1180" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572834429" />
     <state x="740" y="309" key="FileChooserDialogImpl/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589984343983" />
     <state x="740" y="309" key="FileChooserDialogImpl/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748465014" />
@@ -148,10 +170,10 @@
     </state>
     <state width="1877" height="285" key="GridCell.Tab.0.right/-1920.30.1920.1050/0.30.2560.1050@-1920.30.1920.1050" timestamp="1591097410253" />
     <state width="938" height="285" key="GridCell.Tab.0.right/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589803100927" />
-    <state x="577" y="229" key="SettingsEditor" timestamp="1590752414390">
+    <state x="577" y="229" key="SettingsEditor" timestamp="1591126727769">
       <screen x="0" y="30" width="2560" height="1050" />
     </state>
-    <state x="577" y="229" key="SettingsEditor/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1590752414390" />
+    <state x="577" y="229" key="SettingsEditor/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1591126727769" />
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
     <state x="433" y="229" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589822590482" />
     <state x="440" y="129" key="SettingsEditor/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501915" />

@@ -4,17 +4,16 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Page {
 
     private final int slots;
-    private final guiItem[] items;
+    private final GuiItem[] items;
     private final int pageNr;
-    private final guiWindow window;
-    private guiItem nextPage = null;
-    private guiItem prevPage = null;
+    private final GuiWindow window;
+    private GuiItem nextPage = null;
+    private GuiItem prevPage = null;
     private List<Integer> changedSlots = new ArrayList<>();
 
     /**
@@ -23,11 +22,11 @@ public class Page {
      * @param pageNr the page number, duplicates can cause errors!
      * @param window the window the page is on
      */
-    public Page(int slots, int pageNr, guiWindow window) {
+    public Page(int slots, int pageNr, GuiWindow window) {
         this.slots = slots;
         this.pageNr = pageNr;
         this.window = window;
-        items = new guiItem[slots];
+        items = new GuiItem[slots];
     }
 
     /*
@@ -43,7 +42,7 @@ public class Page {
      * @param pageNr the page number, duplicates can cause errors!
      * @param window the window the page is on
      */
-    public Page(int slots, guiItem[] items, int pageNr, guiWindow window) {
+    public Page(int slots, GuiItem[] items, int pageNr, GuiWindow window) {
         this.slots = slots;
         this.items = items;
         this.window = window;
@@ -54,7 +53,7 @@ public class Page {
      * Clears all slots with this guiItem in it
      * @param item guiItem to remove
      */
-    public void removeItem(guiItem item) {
+    public void removeItem(GuiItem item) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 continue;
@@ -104,7 +103,7 @@ public class Page {
      * @param item item to add
      * @param slotArgs <b>[Optional]</b> slot to add the item, if no slot is provided it will be added to the next free slot
      */
-    public void addItem(guiItem item, Integer... slotArgs) {
+    public void addItem(GuiItem item, Integer... slotArgs) {
         int slot;
         if (slotArgs.length > 0) {
             slot = slotArgs[0];
@@ -136,7 +135,7 @@ public class Page {
      * @param item guiItem to move
      * @param slot slot to move to
      */
-    public void moveItem(guiItem item, int slot) {
+    public void moveItem(GuiItem item, int slot) {
         // Set old slot empty
         items[item.getSlot()] = null;
         changedSlots.add(item.getSlot());
@@ -155,7 +154,7 @@ public class Page {
             window.clickableItems.remove(nextPage.getItemStack());
         }
 
-        nextPage = window.nextPageMat == null ? new guiItem(window, Material.ARROW, "&aNext Page", slots - 1) : new guiItem(window, window.nextPageMat, "&aNext Page", slots - 1);
+        nextPage = window.nextPageMat == null ? new GuiItem(window, Material.ARROW, "&aNext Page", slots - 1) : new GuiItem(window, window.nextPageMat, "&aNext Page", slots - 1);
         if (window.nextPageName != null) {
             nextPage.setName(window.nextPageName);
         }
@@ -177,7 +176,7 @@ public class Page {
             window.clickableItems.remove(prevPage.getItemStack());
         }
 
-        prevPage = window.prevPageMat == null ? new guiItem(window, Material.ARROW, "&cPrevious Page", slots - 1) : new guiItem(window, window.prevPageMat, "&cPrevious Page", slots - 1);
+        prevPage = window.prevPageMat == null ? new GuiItem(window, Material.ARROW, "&cPrevious Page", slots - 1) : new GuiItem(window, window.prevPageMat, "&cPrevious Page", slots - 1);
         if (window.prevPageName != null) {
             prevPage.setName(window.prevPageName);
         }
@@ -283,7 +282,7 @@ public class Page {
      * @param slot Slot you want the item of
      * @return guiItem in this slot or null if the slot is empty
      */
-    public guiItem getItem(int slot) {
+    public GuiItem getItem(int slot) {
         if (slot > slots - 1 || slot < 0) {
             return null;
         }
@@ -300,21 +299,21 @@ public class Page {
     /**
      * @return all guiItems on the page (also the empty slots, they are null)
      */
-    public guiItem[] getItems() {
+    public GuiItem[] getItems() {
         return items;
     }
 
     /**
      * @return the "next page" item
      */
-    public guiItem getNextPageItem() {
+    public GuiItem getNextPageItem() {
         return nextPage;
     }
 
     /**
      * @return the "previous page" item
      */
-    public guiItem getPrevPageItem() {
+    public GuiItem getPrevPageItem() {
         return prevPage;
     }
 }
