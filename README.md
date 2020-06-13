@@ -11,8 +11,8 @@ Links:
 Example:
 ```
 GUI gui = new GUI(player, plugin);
-guiWindow window = gui.createWindow("title", 5, WindowType.SPLIT_2);
-guiItem item = window.addItemStack(Material.DIAMOND, "name", 5);
+GuiWindow window = gui.createWindow("title", 5, WindowType.SPLIT_2);
+GuiItem item = window.addItemStack(Material.DIAMOND, "name", 5);
 item.setOnClick(e -> {
   p.sendMessage("abc");
 });
