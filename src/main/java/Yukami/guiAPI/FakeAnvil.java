@@ -11,6 +11,7 @@ class FakeAnvil extends ContainerAnvil {
 
     private EntityPlayer p;
     private String title;
+    boolean doLevelCost = false;
 
     public FakeAnvil(Player player, String title) {
         super(((CraftPlayer) player).getHandle().nextContainerCounter(), ((CraftPlayer) player).getHandle().inventory, ContainerAccess.at(((CraftPlayer) player).getHandle().world, new BlockPosition(0,0,0)));
@@ -33,8 +34,10 @@ class FakeAnvil extends ContainerAnvil {
 
     @Override
     public void e() {
-        super.e();
-        this.levelCost.set(0);
+        if (!doLevelCost) {
+            super.e();
+            this.levelCost.set(0);
+        }
     }
 
 

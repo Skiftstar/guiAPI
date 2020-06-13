@@ -109,7 +109,7 @@ public class GuiItem {
     /**
      * Adds a single line to the Item lore
      * @param lore Line to be added
-     * @param addToBeginning <br>Nullable</br> true if lore should be added to the beginning
+     * @param addToBeginning <b>Nullable</b> true if lore should be added to the beginning
      */
     public void addLore(String lore, boolean... addToBeginning) {
         ItemMeta im = is.getItemMeta();
