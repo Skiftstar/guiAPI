@@ -22,7 +22,7 @@ public class AnvilWindow extends Window implements Listener {
 
     private AnvilInventory inv;
     private Consumer<InventoryClickEvent> onClick = null;
-    private GuiItem[] usedSlots = new GuiItem[2];
+    private GuiItem[] usedSlots = new GuiItem[3];
     private FakeAnvil fakeAnvil;
 
     public AnvilWindow(Player player, String title, JavaPlugin plugin) {
