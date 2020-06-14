@@ -424,6 +424,8 @@ public class GuiWindow extends Window implements Listener {
                 inv.setItem(slot, borderItem);
             }
         }
+
+
     }
 
     /*

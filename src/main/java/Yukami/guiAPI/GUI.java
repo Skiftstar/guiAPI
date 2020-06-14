@@ -71,8 +71,8 @@ public class GUI {
      * Removes a window
      * @param window Window to be deleted
      */
-    public void removeWindows(Window window) {
-        window.delete();
+    public void removeWindow(Window window) {
+        window.unregister();
         windows.remove(window);
     }
 
