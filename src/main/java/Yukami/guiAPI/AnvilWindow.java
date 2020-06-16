@@ -25,7 +25,7 @@ public class AnvilWindow extends Window implements Listener {
     private GuiItem[] usedSlots = new GuiItem[3];
     private FakeAnvil fakeAnvil;
 
-    public AnvilWindow(Player player, String title, JavaPlugin plugin) {
+    public AnvilWindow(Player player, String title) {
         fakeAnvil = new FakeAnvil(player, title);
         inv = fakeAnvil.getInventory();
     }

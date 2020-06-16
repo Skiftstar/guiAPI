@@ -25,11 +25,10 @@ public class ChestWindow extends Window implements Listener {
     private String name;
     private boolean fill = false;
     private JavaPlugin plugin;
-    Material fillMat = null, borderMat = null, nextPageMat = null, prevPageMat = null;
-    String fillName = null, borderName = null, nextPageName = null, prevPageName = null;
+    Material fillMat = null, nextPageMat = null, prevPageMat = null;
+    String fillName = null, nextPageName = null, prevPageName = null;
     private List<GuiItem> pageChangersForward = new ArrayList<>(), pageChangersBackward = new ArrayList<>();
     private Consumer<InventoryClickEvent> playerInvClickFunction = null;
-    private WindowType type;
     private int currPage = 1;
     private Map<Integer, Page> pages = new HashMap<>();
     private boolean usePages = false;
@@ -40,15 +39,13 @@ public class ChestWindow extends Window implements Listener {
      * @param p      Player of that the inv will be opened to
      * @param name   title of the inventory
      * @param rows   Amount of rows, min. 1, max. 6
-     * @param type   WindowType, normal or split
      * @param plugin Plugin reference
      */
-    public ChestWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
+    public ChestWindow(Player p, String name, int rows, JavaPlugin plugin) {
         this.p = p;
         this.name = name;
         this.plugin = plugin;
         this.rows = rows;
-        this.type = type;
         if (rows > 6 || rows < 1) {
             rows = 6;
             this.rows = 6;
@@ -113,20 +110,6 @@ public class ChestWindow extends Window implements Listener {
         usePages = enabled;
         if (pages.size() == 0) {
             pages.put(1, new Page(slots, 1, this));
-        }
-    }
-
-    /**
-     * Sets the items that are used for the border if the WindowType is Split_2
-     * Default Item is White Stained Glass Pane
-     *
-     * @param mat      Material of the border items
-     * @param nameArgs <b>[Optional]</b> Name of the border Items (use " " if you want no name)
-     */
-    public void setBorderInv(Material mat, String... nameArgs) {
-        borderMat = mat;
-        if (nameArgs != null) {
-            borderName = nameArgs[0];
         }
     }
 
@@ -412,20 +395,6 @@ public class ChestWindow extends Window implements Listener {
             GuiItem item = clickableItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
         }
-        if (type.equals(WindowType.SPLIT_2)) {
-            ItemStack borderItem = borderMat == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : new ItemStack(borderMat);
-            if (borderName != null) {
-                ItemMeta im = borderItem.getItemMeta();
-                im.setDisplayName(borderName);
-                borderItem.setItemMeta(im);
-            }
-            for (int i = 0; i < rows; i++) {
-                int slot = 4 + i * 9;
-                inv.setItem(slot, borderItem);
-            }
-        }
-
-
     }
 
     /*
