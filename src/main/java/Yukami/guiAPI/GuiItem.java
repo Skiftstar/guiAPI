@@ -65,7 +65,7 @@ public class GuiItem {
     /**
      * same as other constructors, but without name or amount, name will be item name, amount will be 1
      */
-    GuiItem(GuiWindow window, Material mat, int slot) {
+    GuiItem(ChestWindow window, Material mat, int slot) {
         this.window = window;
         this.slot = slot;
         is = new ItemStack(mat);

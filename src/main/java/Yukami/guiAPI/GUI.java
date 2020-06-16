@@ -7,7 +7,6 @@ Last Updated: April 21, 2020
  */
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,8 @@ public class GUI {
      * @param type WindowType, this determines the further look of the inventory
      * @return the created window
      */
-    public GuiWindow createWindow(String name, int rows, WindowType type) {
-        GuiWindow window = new GuiWindow(p, name, rows, type, plugin);
+    public ChestWindow createWindow(String name, int rows, WindowType type) {
+        ChestWindow window = new ChestWindow(p, name, rows, type, plugin);
         windows.add(window);
         return window;
     }

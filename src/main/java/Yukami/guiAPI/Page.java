@@ -11,7 +11,7 @@ public class Page {
     private final int slots;
     private final GuiItem[] items;
     private final int pageNr;
-    private final GuiWindow window;
+    private final ChestWindow window;
     private GuiItem nextPage = null;
     private GuiItem prevPage = null;
     private List<Integer> changedSlots = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Page {
      * @param pageNr the page number, duplicates can cause errors!
      * @param window the window the page is on
      */
-    public Page(int slots, int pageNr, GuiWindow window) {
+    public Page(int slots, int pageNr, ChestWindow window) {
         this.slots = slots;
         this.pageNr = pageNr;
         this.window = window;
@@ -42,7 +42,7 @@ public class Page {
      * @param pageNr the page number, duplicates can cause errors!
      * @param window the window the page is on
      */
-    public Page(int slots, GuiItem[] items, int pageNr, GuiWindow window) {
+    public Page(int slots, GuiItem[] items, int pageNr, ChestWindow window) {
         this.slots = slots;
         this.items = items;
         this.window = window;

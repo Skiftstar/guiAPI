@@ -40,5 +40,9 @@ class FakeAnvil extends ContainerAnvil {
         }
     }
 
+    public void setTitle(String title) {
+        super.setTitle(new ChatMessage(Util.Color(title)));
+    }
+
 
 }

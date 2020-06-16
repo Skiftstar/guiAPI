@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class GuiWindow extends Window implements Listener {
+public class ChestWindow extends Window implements Listener {
 
     private Inventory inv;
     private Player p;
@@ -43,7 +43,7 @@ public class GuiWindow extends Window implements Listener {
      * @param type   WindowType, normal or split
      * @param plugin Plugin reference
      */
-    public GuiWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
+    public ChestWindow(Player p, String name, int rows, WindowType type, JavaPlugin plugin) {
         this.p = p;
         this.name = name;
         this.plugin = plugin;
