@@ -6,6 +6,7 @@ Author: Yukami
 Last Updated: April 21, 2020
  */
 
+import Yukami.guiAPI.Windows.Window;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;

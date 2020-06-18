@@ -7,11 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/TradeWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/AnvilSlotBoundsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/NoPageChangersException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/NoSuchPageException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/PageFullException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/PagesNotEnabledException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/SlotOutOfBoundsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/AnvilWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/AnvilWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/ChestWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/ChestWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/WindowType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/FakeAnvil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/FakeAnvil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/TradeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/TradeWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,6 +184,10 @@
     <state x="-1480" y="129" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@-1920.30.1920.1050" timestamp="1587572841024" />
     <state x="433" y="229" key="SettingsEditor/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589822590482" />
     <state x="440" y="129" key="SettingsEditor/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501915" />
+    <state x="0" y="30" width="585" height="738" key="find.popup" timestamp="1592487504657">
+      <screen x="0" y="30" width="1366" height="738" />
+    </state>
+    <state x="0" y="30" width="585" height="738" key="find.popup/0.30.1366.738@0.30.1366.738" timestamp="1592487504657" />
     <state x="456" y="250" key="new project wizard" timestamp="1590752459278">
       <screen x="0" y="30" width="2560" height="1050" />
     </state>

@@ -1,5 +1,7 @@
 package Yukami.guiAPI;
 
+import Yukami.guiAPI.Exceptions.NoSuchPageException;
+import Yukami.guiAPI.Exceptions.PagesNotEnabledException;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -215,14 +217,12 @@ public class ChestWindow extends Window implements Listener {
         if (pageArgs.length > 0) {
             // Prevents saving Items where they won't be used
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
-                return null;
+                throw new PagesNotEnabledException();
             }
             int pageNr = pageArgs[0];
             // If the page doesn't exist yet
             if (pages.size() < pageNr || pageNr <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
-                return null;
+                throw new NoSuchPageException();
             }
             // Get the page
             page = pages.get(pageNr);
@@ -249,13 +249,11 @@ public class ChestWindow extends Window implements Listener {
         if (pageArgs.length > 0) {
             // Possible Errors
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
-                return null;
+                throw new PagesNotEnabledException();
             }
             pageNr = pageArgs[0];
             if (pages.size() < pageNr || pageNr <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
-                return null;
+                throw new NoSuchPageException();
             }
             page = pages.get(pageNr);
         } else {
@@ -293,14 +291,12 @@ public class ChestWindow extends Window implements Listener {
         if (pageArgs.length > 0) {
             // Prevents saving Items where they won't be used
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
-                return null;
+                throw new PagesNotEnabledException();
             }
             int pageNr = pageArgs[0];
             // If the page doesn't exist yet
             if (pages.size() < pageNr || pageNr <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
-                return null;
+                throw new NoSuchPageException();
             }
             // Get the page
             page = pages.get(pageNr);
@@ -329,13 +325,11 @@ public class ChestWindow extends Window implements Listener {
         if (pageArgs.length > 0) {
             // Possible Errors
             if (!usePages) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page but didn't enable pages first!\n&cMake sure you enable pages for this window before adding items to pages!"));
-                return null;
+                throw new PagesNotEnabledException();
             }
             pageNr = pageArgs[0];
             if (pages.size() < pageNr || pageNr <= 0) {
-                System.out.println(Util.Color("&c[guiAPI] You tried adding an item to a page that doesn't exist!\n&cRemember that pages start at 1 (e.g. Page 1 is 1, Page 2 is 2, etc.) !"));
-                return null;
+                throw new NoSuchPageException();
             }
             page = pages.get(pageNr);
         } else {
@@ -437,14 +431,11 @@ public class ChestWindow extends Window implements Listener {
     public void changePage(int page) {
         // Checks if pages are actually enabled
         if (!usePages) {
-            System.out.println(Util.Color("&c[guiAPI] There was an attempt to change pages but pages aren't enabled yet!\n&cMake sure to enable them before using any related methods!"));
-            return;
+            throw new PagesNotEnabledException();
         }
         // Checks for monkey input
         if (page < 1 || page > pages.size()) {
-            System.out.println(page);
-            System.out.println(Util.Color("&c[guiAPI] There was an attempt to change to a page that doesn't exist!\n&cRemember that Pages start at 1 !"));
-            return;
+            throw new NoSuchPageException();
         }
         currPage = page;
         updateInventory();

@@ -1,8 +1,7 @@
 package Yukami.guiAPI;
 
-import net.minecraft.server.v1_15_R1.*;
+import Yukami.guiAPI.Exceptions.AnvilSlotBoundsException;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -13,9 +12,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.function.Consumer;
 
 public class AnvilWindow extends Window implements Listener {
@@ -123,8 +120,7 @@ public class AnvilWindow extends Window implements Listener {
     @Override
     public GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
         if (slot > 2 || slot < 0) {
-            System.out.println(Util.Color("&c[GuiAPI] Slot cannot be less than 0 or higher than 2 in an AnvilWindow!"));
-            return null;
+            throw new AnvilSlotBoundsException();
         }
         if (usedSlots[slot] != null) {
             clickableItems.remove(usedSlots[slot].getItemStack());
@@ -190,8 +186,7 @@ public class AnvilWindow extends Window implements Listener {
     @Override
     public GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
         if (slot > 1 || slot < 0) {
-            System.out.println(Util.Color("&c[GuiAPI] Slot cannot be less than 0 or higher than 1 in an AnvilWindow!"));
-            return null;
+            throw new AnvilSlotBoundsException();
         }
         if (usedSlots[slot] != null) {
             clickableItems.remove(usedSlots[slot].getItemStack());

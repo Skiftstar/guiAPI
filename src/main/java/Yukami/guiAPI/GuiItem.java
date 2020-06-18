@@ -1,5 +1,8 @@
 package Yukami.guiAPI;
 
+import Yukami.guiAPI.Util;
+import Yukami.guiAPI.ChestWindow;
+import Yukami.guiAPI.Windows.Window;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;

@@ -1,5 +1,8 @@
 package Yukami.guiAPI;
 
+import Yukami.guiAPI.Exceptions.NoPageChangersException;
+import Yukami.guiAPI.Exceptions.PageFullException;
+import Yukami.guiAPI.Exceptions.SlotOutOfBoundsException;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -109,8 +112,7 @@ public class Page {
             slot = slotArgs[0];
             // Check for monkey input
             if (slot < 0 || slot > slots - 1) {
-                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an item to a slot that is out of bounds!\nItem was not added!"));
-                return;
+                throw new SlotOutOfBoundsException();
             }
             if (items[slot] != null) {
                 removeItem(slot);
@@ -120,8 +122,7 @@ public class Page {
         else {
             slot = getNextFree();
             if (slot == -1) {
-                System.out.println(Util.Color("&c[guiAPI] There was an attempt to add an item to a page that is full!\n&cThe item was not added!"));
-                return;
+                throw new PageFullException();
             }
         }
         items[slot] = item;
@@ -194,7 +195,7 @@ public class Page {
      */
     public void updatePageChangers() {
         if (prevPage == null || nextPage == null) {
-            System.out.println(Util.Color("&c[guiAPI] There was an attempt to update the page changers when they weren't set yet!\n&cMake sure to set them first to avoid errors!"));
+            throw new NoPageChangersException();
         }
         if (prevPage != null) {
             window.clickableItems.remove(prevPage.getItemStack());
