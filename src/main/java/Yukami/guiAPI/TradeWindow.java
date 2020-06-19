@@ -1,14 +1,16 @@
 package Yukami.guiAPI;
 
+import Yukami.guiAPI.Events.FullTradeAction;
+import Yukami.guiAPI.Events.TradeItemAddEvent;
+import Yukami.guiAPI.Exceptions.InvalidPlayerException;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,12 +19,14 @@ import java.util.function.Consumer;
 
 public class TradeWindow extends Window implements Listener {
 
-    Player p1, p2;
-    JavaPlugin plugin;
-    ItemStack[] p1Items = new ItemStack[24];
-    ItemStack[] p2Items = new ItemStack[24];
-    ItemStack borderItem;
-    Inventory invP1, invP2;
+    private Player p1, p2;
+    private JavaPlugin plugin;
+    private ItemStack[] p1Items = new ItemStack[24];
+    private ItemStack[] p2Items = new ItemStack[24];
+    private ItemStack borderItem;
+    private Inventory invP1, invP2;
+    private Consumer<TradeItemAddEvent> onItemAdd = null;
+
 
     public TradeWindow(Player p1, Player p2, String title, JavaPlugin plugin) {
         windowTitle = title;
@@ -38,6 +42,10 @@ public class TradeWindow extends Window implements Listener {
     public void setBorder(ItemStack is) {
         is.setAmount(1);
         borderItem = is;
+    }
+
+    public void setOnItemAdd(Consumer<TradeItemAddEvent> onItemAdd) {
+        this.onItemAdd = onItemAdd;
     }
 
     public void setBorder(Material mat, String... nameArgs) {
@@ -111,13 +119,39 @@ public class TradeWindow extends Window implements Listener {
     }
 
     public void setReady(Player p) {
-
+        if (!(p.equals(p1) || p.equals(p2))) {
+            throw new InvalidPlayerException();
+        }
     }
 
     public void addToTrade(Player p, ItemStack is) {
         if (!(p.equals(p1) || p.equals(p2))) {
-
+            throw new InvalidPlayerException();
         }
+        TradeItemAddEvent e = new TradeItemAddEvent(this, p, p.equals(p1) ? p2 : p1, is);
+        if (onItemAdd != null) {
+            onItemAdd.accept(e);
+        }
+        if (e.isCanceled()) {
+            return;
+        }
+        is = e.getItem();
+        if (e.isRemoveFromInv()) {
+            p.getInventory().remove(is);
+        }
+        int nextFree = getFirstFree(p);
+        if (nextFree == -1) {
+            if (e.getOnTradeFull().equals(FullTradeAction.REPLACE_LAST)) {
+                if (p.equals(p1)) {
+                    p1Items[p1Items.length - 1] = is;
+                } else {
+                    p2Items[p2Items.length - 1] = is;
+                }
+            } else {
+                return;
+            }
+        }
+        update();
     }
 
     public void removeFromTrade(Player p, ItemStack is) {
@@ -125,6 +159,23 @@ public class TradeWindow extends Window implements Listener {
     }
 
     private int getFirstFree(ItemStack[] items) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getFirstFree(Player p) {
+        ItemStack[] items;
+        if (p.equals(p1)) {
+            items = p1Items;
+        } else if (p.equals(p2)) {
+            items = p2Items;
+        } else {
+            throw new InvalidPlayerException();
+        }
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 return i;
@@ -144,7 +195,17 @@ public class TradeWindow extends Window implements Listener {
 
     @Override
     public void removeItem(GuiItem item) {
-
+        invP1.removeItem(item.getItemStack());
+        invP2.removeItem(item.getItemStack());
+        int containsP1 = Util.contains(p1Items, item);
+        if (containsP1 >= 0) {
+            p1Items[containsP1] = null;
+        }
+        int containsP2 = Util.contains(p2Items, item);
+        if (containsP2 >= 0) {
+            p2Items[containsP2] = null;
+        }
+        update();
     }
 
     @Override

@@ -14,6 +14,17 @@ class Util {
         return false;
     }
 
+    static int contains(ItemStack[] items, GuiItem item) {
+        int counter = 0;
+        for (ItemStack i : items) {
+            if (i.equals(item.getItemStack())) {
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    }
+
     /*
      * Colors a String
      * @param s string with color codes
