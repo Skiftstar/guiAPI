@@ -13,11 +13,8 @@ import java.util.function.Consumer;
 
 abstract class Window {
     String windowTitle = null;
-    Consumer<InventoryClickEvent> onPlayerInvClick = null;
     Player p = null;
     Map<ItemStack, GuiItem> clickableItems = new HashMap<>();
-
-    public abstract void setOnPlayerInvClick(Consumer<InventoryClickEvent> function);
 
     abstract void onInvClick(InventoryClickEvent e);
 
@@ -32,8 +29,6 @@ abstract class Window {
     public abstract GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs);
 
     public abstract void unregister();
-
-    public abstract ItemStack[] getItems();
 
     public String getWindowTitle() {
         return windowTitle;

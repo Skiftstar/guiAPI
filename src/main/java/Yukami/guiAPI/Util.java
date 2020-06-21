@@ -14,6 +14,14 @@ class Util {
         return false;
     }
 
+    static void remove(ItemStack[] items, ItemStack is) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i].equals(is)) {
+                items[i] = null;
+            }
+        }
+    }
+
     static int contains(ItemStack[] items, GuiItem item) {
         int counter = 0;
         for (ItemStack i : items) {

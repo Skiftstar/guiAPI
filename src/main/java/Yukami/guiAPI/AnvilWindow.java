@@ -19,6 +19,7 @@ public class AnvilWindow extends Window implements Listener {
 
     private AnvilInventory inv;
     private Consumer<InventoryClickEvent> onClick = null;
+    private Consumer<InventoryClickEvent> onPlayerInvClick = null;
     private GuiItem[] usedSlots = new GuiItem[3];
     private FakeAnvil fakeAnvil;
 
@@ -144,7 +145,6 @@ public class AnvilWindow extends Window implements Listener {
      * The provided function will be executed when the player clicks on an item in his own inventory
      * @param function function to execute
      */
-    @Override
     public void setOnPlayerInvClick(Consumer<InventoryClickEvent> function) {
         onPlayerInvClick = function;
     }
@@ -208,7 +208,6 @@ public class AnvilWindow extends Window implements Listener {
      * Item in the inventory
      * @return Array of Inventory Contents
      */
-    @Override
     public ItemStack[] getItems() {
         return inv.getContents();
     }

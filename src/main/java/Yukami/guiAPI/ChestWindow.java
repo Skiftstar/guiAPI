@@ -462,11 +462,6 @@ public class ChestWindow extends Window implements Listener {
     }
 
     @Override
-    public ItemStack[] getItems() {
-        return inv.getContents();
-    }
-
-    @Override
     void update(int... PageArgs) {
         if (PageArgs.length > 0 && PageArgs[0] != -1) {
             for (int page : PageArgs) {
@@ -531,6 +526,14 @@ public class ChestWindow extends Window implements Listener {
                 Get Methods
     ==========================================
      */
+
+    /**
+     * Returns all items in the inventory
+     * @return items in the inv
+     */
+    public ItemStack[] getItems() {
+        return inv.getContents();
+    }
 
     /**
      * @return the inventory

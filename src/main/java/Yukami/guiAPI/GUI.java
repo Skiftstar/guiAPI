@@ -6,7 +6,6 @@ Author: Yukami
 Last Updated: April 21, 2020
  */
 
-import Yukami.guiAPI.Windows.Window;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
@@ -33,17 +32,21 @@ public class GUI {
      * Creates a window (an inventory)
      * @param name Title of the inventory
      * @param rows rows of the inv (min. 1, max. 6)
-     * @param type WindowType, this determines the further look of the inventory
      * @return the created window
      */
-    public ChestWindow createWindow(String name, int rows, WindowType type) {
-        ChestWindow window = new ChestWindow(p, name, rows, type, plugin);
+    public ChestWindow createWindow(String name, int rows) {
+        ChestWindow window = new ChestWindow(p, name, rows, plugin);
         windows.add(window);
         return window;
     }
 
+    /**
+     * Creates a new AnvilWindow
+     * @param title Title of the window
+     * @return the created AnvilWindow
+     */
     public AnvilWindow createAnvilWindow(String title) {
-        AnvilWindow window = new AnvilWindow(p, title, plugin);
+        AnvilWindow window = new AnvilWindow(p, title);
         windows.add(window);
         return window;
     }
