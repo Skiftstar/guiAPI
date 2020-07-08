@@ -40,7 +40,7 @@ public class TradeWindow extends Window implements Listener {
 
 
     /**
-     * Creates a new Trade Window
+     * Creates a new Trade Windows
      * @param p1 Player 1 that is participating in the trade
      * @param p2 Player 2 that is participating in the trade
      * @param title Title of the trade window
@@ -55,6 +55,7 @@ public class TradeWindow extends Window implements Listener {
         ready.put(p2, false);
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         borderItem = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        borderReadyItem = new ItemStack(Material.GREEN_STAINED_GLASS);
         invP1 = Bukkit.createInventory(p1, 54, Util.Color(title));
         invP2 = Bukkit.createInventory(p2, 54,Util.Color(title));
     }
@@ -623,10 +624,10 @@ public class TradeWindow extends Window implements Listener {
         }
         e.setCancelled(true);
         // If the item is a item p1 offers
-        if (Util.contains(p1Items, is)) {
+        if (Util.contains(p1Items, is) && e.getWhoClicked().equals(p1)) {
             removeFromTrade(p1, is);
         // if the item is a item p2 offers
-        } else if (Util.contains(p2Items, is)) {
+        } else if (Util.contains(p2Items, is) && e.getWhoClicked().equals(p2)) {
             removeFromTrade(p2, is);
         // Check if its the ready button
         } else if (is.equals(setReadyItem)) {
@@ -642,15 +643,16 @@ public class TradeWindow extends Window implements Listener {
             if (!e.getPlayer().equals(p1)) {
                 return;
             } else {
+                unregister();
                 p2.closeInventory();
             }
         } else if (e.getInventory().equals(invP2)) {
             if (!e.getPlayer().equals(p2)) {
                 return;
             } else {
+                unregister();
                 p1.closeInventory();
             }
         }
-        unregister();
     }
 }
