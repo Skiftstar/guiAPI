@@ -100,6 +100,12 @@ public class TradeWindow extends Window implements Listener {
             } else {
                 return;
             }
+        } else {
+            if (p.equals(p1)) {
+                p1Items[nextFree] = is;
+            } else {
+                p2Items[nextFree] = is;
+            }
         }
         update();
     }
@@ -238,6 +244,7 @@ public class TradeWindow extends Window implements Listener {
 
     @Override
     void open() {
+        update();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         p1.openInventory(invP1);
         p2.openInventory(invP2);
