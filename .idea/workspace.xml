@@ -7,52 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b7407fa-12b7-482c-b8d4-6dd32682da04" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Events/TradeItemRemoveEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Exceptions/InvalidItemException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/AnvilWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/AnvilWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/GUI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/Page.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/Page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/guiItem.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Yukami/guiAPI/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-noframe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/constant-values.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/package-list" beforeDir="false" afterPath="$PROJECT_DIR$/docs/package-list" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/guiAPI_jar/guiAPI.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/AnvilWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/AnvilWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/ChestWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/ChestWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/GuiItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/TradeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/TradeWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Yukami/guiAPI/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/guiAPI.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/WindowType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Yukami/guiAPI/guiWindow.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="44954" />
+    <option name="totalTimeSeconds" value="49353" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -223,22 +180,24 @@
       <screen x="0" y="30" width="1366" height="738" />
     </state>
     <state x="0" y="30" width="585" height="738" key="find.popup/0.30.1366.738@0.30.1366.738" timestamp="1592487504657" />
-    <state x="131" y="30" key="new project wizard" timestamp="1592510821551">
-      <screen x="0" y="30" width="1366" height="738" />
+    <state x="246" y="30" key="new project wizard" timestamp="1594216621862">
+      <screen x="0" y="30" width="2560" height="1050" />
     </state>
     <state x="456" y="250" key="new project wizard/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1590752459278" />
     <state x="131" y="30" key="new project wizard/0.30.1366.738@0.30.1366.738" timestamp="1592510821551" />
     <state x="342" y="250" key="new project wizard/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589984332683" />
+    <state x="246" y="30" key="new project wizard/2560.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1594216621862" />
     <state x="712" y="358" width="707" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1589822590038">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="712" y="358" width="707" height="506" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.30.1920.1050/1920.30.1920.1050/-1920.30.1920.1050@0.30.1920.1050" timestamp="1589822590038" />
     <state x="712" y="358" width="621" height="480" key="org.intellij.images.editor.actions.BackgroundImageDialog/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589748501261" />
-    <state x="821" y="258" width="672" height="677" key="run.anything.popup" timestamp="1592648894713">
+    <state x="821" y="258" width="672" height="677" key="run.anything.popup" timestamp="1594219056957">
       <screen x="0" y="30" width="2560" height="1050" />
     </state>
     <state x="821" y="258" width="672" height="677" key="run.anything.popup/-1920.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1592648894713" />
     <state x="616" y="258" key="run.anything.popup/1920.30.1920.1050/-1920.30.1920.1050/0.30.1920.1050@0.30.1920.1050" timestamp="1589754167294" />
+    <state x="821" y="258" width="672" height="677" key="run.anything.popup/2560.30.1920.1050/0.30.2560.1050@0.30.2560.1050" timestamp="1594219056957" />
     <state x="-1297" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1592147193392">
       <screen x="-1920" y="30" width="1920" height="1050" />
     </state>

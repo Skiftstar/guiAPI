@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
@@ -31,6 +32,10 @@ public class TradeWindow extends Window implements Listener {
     private Inventory invP1, invP2;
     private Consumer<TradeItemAddEvent> onItemAdd = null;
     private Consumer<TradeItemRemoveEvent> onItemRemove = null;
+    private int countdownTask, countdown = 3;
+    private boolean doCountdown = false;
+    private String countdownMessage = "&aTrade will be completed in &6%sec seconds&a!", tradeCompleteMess = "&aTrade completed!";
+    private String noInvSpace = "&cYou do not have enough space in your inventory!", noInvSpacePartner = "&cYou partner does not have enough space in his inventory!";
 
 
     /**
@@ -59,6 +64,10 @@ public class TradeWindow extends Window implements Listener {
     ========================================================
      */
 
+    @Override
+    public void unregister() {
+        HandlerList.unregisterAll(this);
+    }
 
     /**
      * Adds an item to the trade offers of a player
@@ -150,6 +159,77 @@ public class TradeWindow extends Window implements Listener {
         update();
     }
 
+    /**
+     * Completes the trade
+     * @param force - If true, skips the countdown
+     */
+    public void completeTrade(boolean force) {
+        if (force) {
+
+        } else {
+            doCountdown = true;
+            countdownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    p1.sendMessage(Util.Color(countdownMessage.replace("%sec", "" + countdown)));
+                    p2.sendMessage(Util.Color(countdownMessage.replace("%sec", "" + countdown)));
+                    countdown--;
+                    if (countdown == 0) {
+                        p1.sendMessage(Util.Color(tradeCompleteMess));
+                        p2.sendMessage(Util.Color(tradeCompleteMess));
+                        doCountdown = false;
+                        distributeItems();
+                        p1.closeInventory();
+                        p2.closeInventory();
+                        Bukkit.getScheduler().cancelTask(countdownTask);
+                    }
+                }
+            }, 0, countdown * 20);
+        }
+    }
+
+    /*
+    ========================================================
+                       Private Methods
+    ========================================================
+     */
+
+    private void distributeItems() {
+        for (ItemStack itemStack : p1Items) {
+            if (itemStack == null) {
+                break;
+            }
+            p1.getInventory().remove(itemStack);
+        }
+        for (ItemStack p2Item : p2Items) {
+            if (p2Item == null) {
+                break;
+            }
+            p1.getInventory().addItem(p2Item);
+            p2.getInventory().remove(p2Item);
+        }
+        for (ItemStack p1Item : p1Items) {
+            if (p1Item == null) {
+                break;
+            }
+            p2.getInventory().addItem(p1Item);
+        }
+    }
+
+    private boolean invSpaceCheck() {
+        if (Util.getContentLength(p1Items) > Util.getFreeSlotsInInv(p2.getInventory()) - Util.getContentLength(p2Items)) {
+            p1.sendMessage(Util.Color(noInvSpacePartner));
+            p2.sendMessage(Util.Color(noInvSpace));
+            return false;
+        }
+        if (Util.getContentLength(p2Items) > Util.getFreeSlotsInInv(p1.getInventory()) - Util.getContentLength(p1Items)) {
+            p1.sendMessage(Util.Color(noInvSpace));
+            p2.sendMessage(Util.Color(noInvSpacePartner));
+            return false;
+        }
+        return true;
+    }
+
     /*
     ========================================================
                        Package only
@@ -158,18 +238,56 @@ public class TradeWindow extends Window implements Listener {
 
     @Override
     void open() {
-
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        p1.openInventory(invP1);
+        p2.openInventory(invP2);
     }
-
-    @Override
-    public void unregister() {
-
-    }
-
-
 
     @Override
     void update(int... PageArgs) {
+        Player[] players = new Player[] {p1, p2};
+        Inventory[] invs = new Inventory[] {invP1, invP2};
+        ItemStack[][] items = new ItemStack[][] {p1Items, p2Items};
+
+        // Do for both players
+        for (int player = 0; player < 2; player++) {
+            // Handles the border
+            for (int slot = 4; slot < 56; slot += 9) {
+                if (slot < 27 && ready.get(players[player])) {
+                    invs[player].setItem(slot, borderReadyItem);
+                } else if (slot > 27 && ready.get(players[(player + 1) % 2])) {
+                    invs[player].setItem(slot, borderReadyItem);
+                } else {
+                    invs[player].setItem(slot, borderItem);
+                }
+            }
+            int item = 0;
+            // Handles left side
+            for (int slot = 0; slot < 48; slot++) {
+                if (slot < 9 || slot % 9 < 4) {
+                    if (items[(player + 1) % 2][item] == null) {
+                        break;
+                    }
+                    invs[player].setItem(slot, items[(player + 1) % 2][item]);
+                    item++;
+                } else {
+                    slot = (int) slot / 9 * 9;
+                }
+            }
+            item = 0;
+            // Handles right side
+            for (int slot = 5; slot < 54; slot++) {
+                if (slot < 9 || slot % 9 >= 4) {
+                    if (items[(player + 1) % 2][item] == null) {
+                        break;
+                    }
+                    invs[player].setItem(slot, items[(player + 1) % 2][item]);
+                    item++;
+                } else {
+                    slot = (int) slot / 9 * 9 + 5;
+                }
+            }
+        }
 
     }
 
@@ -178,6 +296,22 @@ public class TradeWindow extends Window implements Listener {
                             Setters
     ========================================================
      */
+
+    /**
+     * Sets the message displayed when the player doesn't have enough space in his inventory
+     * @param mess - the message
+     */
+    public void setNoInvSpaceMess(String mess) {
+        noInvSpace = mess;
+    }
+
+    /**
+     * Sets the message when the players trade partner doesn't have enough space in his inventory
+     * @param mess - the message
+     */
+    public void setNoInvSpacePartnerMess(String mess) {
+        noInvSpacePartner = mess;
+    }
 
     /**
      * Sets the Item that border between the trade offers
@@ -274,10 +408,46 @@ public class TradeWindow extends Window implements Listener {
      * Force sets the Player ready/not ready
      * @param p player to set ready
      */
-    public void setReady(Player p, boolean ready) {
+    public void setReady(Player p, boolean isReady) {
         if (!(p.equals(p1) || p.equals(p2))) {
             throw new InvalidPlayerException();
         }
+        ready.replace(p, ready.get(p), isReady);
+        if (ready.get(p1) && ready.get(p2)) {
+            if (!invSpaceCheck()) {
+                ready.replace(p1, true, false);
+                ready.replace(p1, true, false);
+                update();
+                return;
+            }
+            completeTrade(false);
+        } else {
+            if (doCountdown) {
+                doCountdown = false;
+                Bukkit.getScheduler().cancelTask(countdownTask);
+            }
+        }
+        update();
+    }
+
+    public void setTradeCompleteMess(String message) {
+        tradeCompleteMess = message;
+    }
+
+    /**
+     * Sets the countdown message, use %sec as a placeholder for the remaining seconds
+     * @param message - The countdown message
+     */
+    public void setCountdownMessage(String message) {
+        countdownMessage = message;
+    }
+
+    /**
+     * Sets the length of the countdown of the trade before it completes
+     * @param countdown - countdown in seconds
+     */
+    public void setCountdown(int countdown) {
+        this.countdownTask = countdown;
     }
 
     /**
@@ -399,17 +569,22 @@ public class TradeWindow extends Window implements Listener {
         if (!(e.getWhoClicked().equals(p1) || e.getWhoClicked().equals(p2))) {
             return;
         }
+        // P1 Inventory
         if (clicked.equals(p1.getInventory())) {
+            // If the player is not the inv owner
             if (!e.getWhoClicked().equals(p1)) {
                 return;
             }
             ItemStack is = e.getCurrentItem();
+            //If no item is clicked
             if (is == null || is.getType().equals(Material.AIR)) {
                 return;
             }
+            // add the clicked item to the trade
             addToTrade(p1, is);
             return;
         }
+        // Same for Player 2
         if (clicked.equals(p2.getInventory())) {
             if (!e.getWhoClicked().equals(p2)) {
                 return;
@@ -421,22 +596,28 @@ public class TradeWindow extends Window implements Listener {
             addToTrade(p2, is);
             return;
         }
+        // Cancel hotbar swapping
         if (e.getAction().equals(InventoryAction.HOTBAR_SWAP)) {
             e.setCancelled(true);
             return;
         }
+        // If the clicked inv is not one of the trade windows
         if (!(clicked.equals(invP1) || clicked.equals(invP2))) {
             return;
         }
         ItemStack is = e.getCurrentItem();
+        // if no items are clicked
         if (is == null || is.getType().equals(Material.AIR)) {
             return;
         }
         e.setCancelled(true);
+        // If the item is a item p1 offers
         if (Util.contains(p1Items, is)) {
             removeFromTrade(p1, is);
+        // if the item is a item p2 offers
         } else if (Util.contains(p2Items, is)) {
             removeFromTrade(p2, is);
+        // Check if its the ready button
         } else if (is.equals(setReadyItem)) {
             setReady(p, !ready.get(p));
         }
@@ -444,9 +625,16 @@ public class TradeWindow extends Window implements Listener {
 
     @EventHandler
     @Override
+    // Cancel inv close if the it's not the inv owner who closes the inv
     void onInvClose(InventoryCloseEvent e) {
-        if (!e.getPlayer().equals(p)) {
-            return;
+        if (e.getInventory().equals(invP1)) {
+            if (!e.getPlayer().equals(p1)) {
+                return;
+            }
+        } else if (e.getInventory().equals(invP2)) {
+            if (!e.getPlayer().equals(p2)) {
+                return;
+            }
         }
         unregister();
     }
