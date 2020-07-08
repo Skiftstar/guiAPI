@@ -51,6 +51,18 @@ public class GUI {
         return window;
     }
 
+    /**
+     * Creates a trade window
+     * @param partner The partner (the other player will be the GUI holder)
+     * @param title Title of the trade window
+     * @return The created TradeWindow
+     */
+    public TradeWindow createTradeWindow(Player partner, String title) {
+        TradeWindow window = new TradeWindow(p, partner, title, plugin);
+        windows.add(window);
+        return window;
+    }
+
     /*
     ==========================================
                 User Accessible

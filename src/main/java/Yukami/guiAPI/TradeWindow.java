@@ -161,7 +161,7 @@ public class TradeWindow extends Window implements Listener {
 
     /**
      * Completes the trade
-     * @param force - If true, skips the countdown
+     * @param force If true, skips the countdown
      */
     public void completeTrade(boolean force) {
         if (force) {
@@ -299,7 +299,7 @@ public class TradeWindow extends Window implements Listener {
 
     /**
      * Sets the message displayed when the player doesn't have enough space in his inventory
-     * @param mess - the message
+     * @param mess the message
      */
     public void setNoInvSpaceMess(String mess) {
         noInvSpace = mess;
@@ -307,7 +307,7 @@ public class TradeWindow extends Window implements Listener {
 
     /**
      * Sets the message when the players trade partner doesn't have enough space in his inventory
-     * @param mess - the message
+     * @param mess the message
      */
     public void setNoInvSpacePartnerMess(String mess) {
         noInvSpacePartner = mess;
