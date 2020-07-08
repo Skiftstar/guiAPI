@@ -45,7 +45,7 @@ class Util {
 
     static void remove(ItemStack[] items, ItemStack is) {
         for (int i = 0; i < items.length; i++) {
-            if (items[i].equals(is)) {
+            if (items[i] != null && items[i].equals(is)) {
                 items[i] = null;
             }
         }
