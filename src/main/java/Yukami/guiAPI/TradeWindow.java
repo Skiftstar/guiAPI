@@ -606,7 +606,7 @@ public class TradeWindow extends Window implements Listener {
             removeFromTrade(p2, is);
         // Check if its the ready button
         } else if (is.equals(borderItem)) {
-            setReady(p, !ready.get(p));
+            setReady((Player) e.getWhoClicked(), !ready.get((Player) e.getWhoClicked()));
         }
     }
 
