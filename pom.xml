@@ -25,6 +25,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>nms-repo</id>
+            <url>https://repo.codemc.org/repository/nms/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -35,11 +39,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.minecraft.server</groupId>
-            <artifactId>spigot-server</artifactId>
-            <version>1.15.R1</version>
-            <scope>system</scope>
-            <systemPath>C:\Users\Yukami\Desktop\Minecraft\spigot_jars/spigot-1.15.2.jar</systemPath>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
