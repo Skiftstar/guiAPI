@@ -272,10 +272,10 @@ public class TradeWindow extends Window implements Listener {
             // Handles left side
             for (int slot = 0; slot < 48; slot++) {
                 if (slot < 9 || slot % 9 < 4) {
-                    if (items[(player + 1) % 2][item] == null) {
+                    if (items[player][item] == null) {
                         break;
                     }
-                    invs[player].setItem(slot, items[(player + 1) % 2][item]);
+                    invs[player].setItem(slot, items[player][item]);
                     item++;
                 } else {
                     slot = (int) slot / 9 * 9;

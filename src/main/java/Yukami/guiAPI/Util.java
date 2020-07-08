@@ -29,7 +29,13 @@ class Util {
     }
 
     static boolean contains(ItemStack[] items, ItemStack is) {
+        if (is == null) {
+            return false;
+        }
         for (ItemStack i : items) {
+            if (i == null) {
+                continue;
+            }
             if (i.equals(is)) {
                 return true;
             }
