@@ -141,8 +141,6 @@ public class TradeWindow extends Window implements Listener {
         } else {
             Util.remove(p2Items, is);
         }
-        System.out.println(Arrays.toString(p1Items));
-        System.out.println(Arrays.toString(p2Items));
         update();
     }
 
@@ -258,6 +256,9 @@ public class TradeWindow extends Window implements Listener {
         Player[] players = new Player[] {p1, p2};
         Inventory[] invs = new Inventory[] {invP1, invP2};
         ItemStack[][] items = new ItemStack[][] {p1Items, p2Items};
+
+        invP1.clear();
+        invP2.clear();
 
         // Do for both players
         for (int player = 0; player < 2; player++) {
@@ -640,10 +641,14 @@ public class TradeWindow extends Window implements Listener {
         if (e.getInventory().equals(invP1)) {
             if (!e.getPlayer().equals(p1)) {
                 return;
+            } else {
+                p2.closeInventory();
             }
         } else if (e.getInventory().equals(invP2)) {
             if (!e.getPlayer().equals(p2)) {
                 return;
+            } else {
+                p1.closeInventory();
             }
         }
         unregister();
