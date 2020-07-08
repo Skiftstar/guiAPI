@@ -29,7 +29,7 @@ public class TradeWindow extends Window implements Listener {
     private ItemStack[] p1Items = new ItemStack[24];
     private ItemStack[] p2Items = new ItemStack[24];
     private Map<Player, Boolean> ready = new HashMap<>();
-    private ItemStack borderItem, borderReadyItem, setReadyItem;
+    private ItemStack borderItem, borderReadyItem;
     private Inventory invP1, invP2;
     private Consumer<TradeItemAddEvent> onItemAdd = null;
     private Consumer<TradeItemRemoveEvent> onItemRemove = null;
@@ -326,7 +326,7 @@ public class TradeWindow extends Window implements Listener {
     }
 
     /**
-     * Sets the Item that border between the trade offers
+     * Sets the Item that border between the trade offers, the players have to click this item to set their status to ready
      * @param is Item the border should be
      */
     public void setBorder(ItemStack is) {
@@ -373,31 +373,6 @@ public class TradeWindow extends Window implements Listener {
             is.setItemMeta(im);
         }
         borderReadyItem = is;
-    }
-
-    /**
-     * Item that the player has to click to show he is/isn't ready
-     * @param is The Item
-     */
-    public void setReadyItem(ItemStack is) {
-        is.setAmount(1);
-        setReadyItem = is;
-    }
-
-    /**
-     * See above
-     * @param mat Material of the Item
-     * @param nameArgs <b>Nullable</b> Name of the item
-     */
-    public void setReadyItem(Material mat, String... nameArgs) {
-        ItemStack is = new ItemStack(mat);
-        if (nameArgs.length > 0) {
-            String name = nameArgs[0];
-            ItemMeta im = is.getItemMeta();
-            im.setDisplayName(Util.Color(name));
-            is.setItemMeta(im);
-        }
-        setReadyItem = is;
     }
 
     /**
@@ -630,7 +605,7 @@ public class TradeWindow extends Window implements Listener {
         } else if (Util.contains(p2Items, is) && e.getWhoClicked().equals(p2)) {
             removeFromTrade(p2, is);
         // Check if its the ready button
-        } else if (is.equals(setReadyItem)) {
+        } else if (is.equals(borderItem)) {
             setReady(p, !ready.get(p));
         }
     }
