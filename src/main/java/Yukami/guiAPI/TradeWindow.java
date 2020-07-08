@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -140,6 +141,8 @@ public class TradeWindow extends Window implements Listener {
         } else {
             Util.remove(p2Items, is);
         }
+        System.out.println(Arrays.toString(p1Items));
+        System.out.println(Arrays.toString(p2Items));
         update();
     }
 
