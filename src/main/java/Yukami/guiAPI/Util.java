@@ -10,18 +10,20 @@ import java.util.List;
 class Util {
 
     static int getContentLength(ItemStack[] Array) {
-        for (int i = 0; i < Array.length; i++) {
-            if (Array[i] == null) {
+        int i = 0;
+        for (ItemStack item : Array) {
+            if (item == null) {
                 return i;
             }
+            i++;
         }
-        return Array.length;
+        return i;
     }
 
     static int getFreeSlotsInInv(Inventory inv) {
         int emptySlots = 0;
-        for (int i = 0; i < inv.getContents().length; i++) {
-            if (inv.getContents()[i] == null) {
+        for (ItemStack is : inv.getContents()) {
+            if (is == null) {
                 emptySlots++;
             }
         }

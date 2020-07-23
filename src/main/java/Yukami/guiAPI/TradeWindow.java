@@ -17,9 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class TradeWindow extends Window implements Listener {
@@ -28,6 +26,8 @@ public class TradeWindow extends Window implements Listener {
     private JavaPlugin plugin;
     private ItemStack[] p1Items = new ItemStack[24];
     private ItemStack[] p2Items = new ItemStack[24];
+    private List<ItemStack> p1Return = new ArrayList<>();
+    private List<ItemStack> p2Return = new ArrayList<>();
     private Map<Player, Boolean> ready = new HashMap<>();
     private ItemStack borderItem, borderReadyItem;
     private Inventory invP1, invP2;
@@ -88,9 +88,6 @@ public class TradeWindow extends Window implements Listener {
             return;
         }
         is = e.getItem();
-        if (e.isRemoveFromInv()) {
-            p.getInventory().remove(is);
-        }
         int nextFree = getFirstFree(p);
         if (nextFree == -1) {
             if (e.getOnTradeFull().equals(FullTradeAction.REPLACE_LAST)) {
@@ -107,6 +104,15 @@ public class TradeWindow extends Window implements Listener {
                 p1Items[nextFree] = is;
             } else {
                 p2Items[nextFree] = is;
+            }
+        }
+        if (e.isRemoveFromInv()) {
+            p.getInventory().remove(is);
+            //Add to return list for later redistribution should the trade be canceled
+            if (p.equals(p1)) {
+                p1Return.add(e.getItem());
+            } else {
+                p2Return.add(e.getItem());
             }
         }
         update();
@@ -136,6 +142,12 @@ public class TradeWindow extends Window implements Listener {
         is = e.getItem();
         if (e.isAddBackToInv()) {
             p.getInventory().addItem(is);
+            //Remove from return list to prevent item duplications
+            if (p.equals(p1)) {
+                p1Return.remove(e.getItem());
+            } else {
+                p2Return.remove(e.getItem());
+            }
         }
         if (p.equals(p1)) {
             Util.remove(p1Items, is);
@@ -201,6 +213,18 @@ public class TradeWindow extends Window implements Listener {
                        Private Methods
     ========================================================
      */
+
+    /*
+    Handles returning items back to the player inventories once the TradeWindow gets closed by a player or by another plugin i.e. when the trade is canceled
+     */
+    private void giveItemsBack() {
+        for (ItemStack is : p1Return) {
+            p1.getInventory().addItem(is);
+        }
+        for (ItemStack is : p2Return) {
+            p2.getInventory().addItem(is);
+        }
+    }
 
     private void distributeItems() {
         for (ItemStack itemStack : p1Items) {
@@ -617,17 +641,17 @@ public class TradeWindow extends Window implements Listener {
         if (e.getInventory().equals(invP1)) {
             if (!e.getPlayer().equals(p1)) {
                 return;
-            } else {
-                unregister();
-                p2.closeInventory();
             }
+            unregister();
+            p2.closeInventory();
+            giveItemsBack();
         } else if (e.getInventory().equals(invP2)) {
             if (!e.getPlayer().equals(p2)) {
                 return;
-            } else {
-                unregister();
-                p1.closeInventory();
             }
+            unregister();
+            p1.closeInventory();
+            giveItemsBack();
         }
     }
 }
