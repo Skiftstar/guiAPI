@@ -41,7 +41,7 @@ for (int i = 0; i < 150; i++) {
 gui.open(window);
 ```
 
-There are also other types of Window, for example Anvil Windows (which are great for letting the player input text!)
+There are also other types of Windows, for example Anvil Windows (which are great for letting the player input text!)
 ```
 GUI gui = new GUI(p, plugin);
 AnvilWindow window = gui.createAnvilWindow("&aAn original Title");
