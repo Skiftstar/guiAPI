@@ -50,7 +50,7 @@ window.setOnClick(e -> {
 gui.open(window);
 ```
 
-Or the most recent Window, a TradeWindow!
+Or the most recent Window, a TradeWindow which even has custom Events!
 ```
 GUI gui = new GUI(p, plugin);
 //Params: Trade Partner, title
