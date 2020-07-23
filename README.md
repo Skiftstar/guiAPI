@@ -9,6 +9,8 @@ Links:
 
 [Adding to Project: Maven](https://jitpack.io/#Skiftstar/guiAPI)
 
+When building your Plugin, I recommend shading this API (it might work without shading but no 100% guarantee here). [Here's a link for the shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)
+
 Examples:
 
 Creating a simple chest Window with an Apple in the 6th slot that messages the player "Hello Minecraft!" once it is clicked
