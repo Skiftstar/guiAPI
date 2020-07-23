@@ -1,4 +1,4 @@
-# guiAPI
+# GuiAPI
 ### This API is tested for 1.15.2 ! Make sure to set your API Version in the plugin.yml !!
 ### Anvil Window might not work in other versions of the usage of NMS !!
 An API for Minecraft Spigot that makes creating GUIs easier
