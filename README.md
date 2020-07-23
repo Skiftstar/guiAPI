@@ -69,7 +69,7 @@ window.completeTrade(true);
 gui.open(window);
 ```
 
-The API also has Custom Exceptions, for a list of all Exception please check the JavaDoc!
+The API also has Custom Exceptions, for a list of all Exceptions please check the JavaDoc!
 
 Example of an exception:
 ```
