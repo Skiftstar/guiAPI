@@ -59,6 +59,29 @@ public class GuiItem {
     }
 
     /**
+     * Changes a single line in the lore of the item
+     * @param lineInd Line to update
+     * @param line new Line
+     */
+    public void updateLore(int lineInd, String line) {
+        ItemMeta im = is.getItemMeta();
+        window.clickableItems.remove(is);
+        if (!im.hasLore()) {
+            return;
+        }
+        List<String> lore = im.getLore();
+        if (lore.size() <= lineInd) {
+            return;
+        }
+        lore.remove(lineInd);
+        lore.add(lineInd, Util.Color(line));
+        im.setLore(lore);
+        is.setItemMeta(im);
+        window.clickableItems.put(is, this);
+        window.update(page);
+    }
+
+    /**
      * Clears the lore of the item
      */
     public void clearLore() {
