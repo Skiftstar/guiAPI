@@ -39,6 +39,16 @@ public class Page {
      */
 
     /**
+     * Clears the entire Page
+     */
+    public void clear() {
+        for (GuiItem item : items) {
+            items[item.getSlot()] = null;
+            changedSlots.add(item.getSlot());
+        }
+    }
+
+    /**
      * Creates a page with already given items
      * @param slots slots on the page, changing this from the slots the window has causes errors!!
      * @param items array of guiItems that should be added to the page already

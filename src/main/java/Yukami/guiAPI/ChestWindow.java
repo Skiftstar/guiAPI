@@ -207,6 +207,16 @@ public class ChestWindow extends Window implements Listener {
      */
 
     /**
+     * Clears the entire inventory
+     */
+    public void clear() {
+        clickableItems.clear();
+        for (Page page : pages.values()) {
+            page.clear();
+        }
+    }
+
+    /**
      * Sets the function that will be executed once the player clicks an item in his inventory
      * @param func Function to be executed
      */
