@@ -14,7 +14,7 @@ class FakeAnvil extends ContainerAnvil {
     private String title;
     boolean doLevelCost = false;
 
-    public FakeAnvil(Player player, String title) {
+    FakeAnvil(Player player, String title) {
         super(((CraftPlayer) player).getHandle().nextContainerCounter(), ((CraftPlayer) player).getHandle().inventory, ContainerAccess.at(((CraftPlayer) player).getHandle().world, new BlockPosition(0,0,0)));
         this.checkReachable = false;
         p = ((CraftPlayer) player).getHandle();
@@ -22,11 +22,11 @@ class FakeAnvil extends ContainerAnvil {
         setTitle(new ChatMessage(Util.Color(title)));
     }
 
-    public AnvilInventory getInventory() {
+    AnvilInventory getInventory() {
         return (AnvilInventory) getBukkitView().getTopInventory();
     }
 
-    public void open() {
+    void open() {
         p.activeContainer = this;
         p.activeContainer.addSlotListener(p);
 
@@ -41,7 +41,7 @@ class FakeAnvil extends ContainerAnvil {
         }
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         super.setTitle(new ChatMessage(Util.Color(title)));
     }
 

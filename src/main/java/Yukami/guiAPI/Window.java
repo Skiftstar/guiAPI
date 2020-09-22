@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 abstract class Window {
     String windowTitle = null;
@@ -24,9 +23,9 @@ abstract class Window {
 
     abstract void open();
 
-    public abstract GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs);
+    public abstract GuiItem setItem(Material mat, String name, int slot, Integer... pageArgs);
 
-    public abstract GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs);
+    public abstract GuiItem setItem(ItemStack is, int slot, Integer... pageArgs);
 
     public abstract void unregister();
 

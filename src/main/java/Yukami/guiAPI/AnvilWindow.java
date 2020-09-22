@@ -119,7 +119,7 @@ public class AnvilWindow extends Window implements Listener {
      * @return The GuiItem or null if there was an error
      */
     @Override
-    public GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
+    public GuiItem setItem(ItemStack is, int slot, Integer... pageArgs) {
         if (slot > 2 || slot < 0) {
             throw new AnvilSlotBoundsException();
         }
@@ -184,7 +184,7 @@ public class AnvilWindow extends Window implements Listener {
      * @return the added GuiItem or null if there was an error
      */
     @Override
-    public GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
+    public GuiItem setItem(Material mat, String name, int slot, Integer... pageArgs) {
         if (slot > 1 || slot < 0) {
             throw new AnvilSlotBoundsException();
         }

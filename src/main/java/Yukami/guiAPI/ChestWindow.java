@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,6 +35,8 @@ public class ChestWindow extends Window implements Listener {
     private int currPage = 1;
     private Map<Integer, Page> pages = new HashMap<>();
     private boolean usePages = false;
+    private Consumer<InventoryOpenEvent> onOpen = null;
+    private Consumer<InventoryCloseEvent> onClose = null;
 
     /**
      * Creates a Window (an inventory) that can be further customized
@@ -211,7 +214,7 @@ public class ChestWindow extends Window implements Listener {
         playerInvClickFunction = func;
     }
 
-    public GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
+    public GuiItem setItem(ItemStack is, int slot, Integer... pageArgs) {
         GuiItem item;
         Page page;
         if (pageArgs.length > 0) {
@@ -242,7 +245,7 @@ public class ChestWindow extends Window implements Listener {
         }
     }
 
-    public GuiItem addItemStack(ItemStack is, Integer... pageArgs) {
+    public GuiItem addItem(ItemStack is, Integer... pageArgs) {
         GuiItem item;
         Page page;
         int pageNr;
@@ -285,7 +288,7 @@ public class ChestWindow extends Window implements Listener {
      * @param pageArgs <b>[Optional]</b> page that the item will be on (enable pages first!)
      * @return Returns the created <b>guiItem</b>
      */
-    public GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
+    public GuiItem setItem(Material mat, String name, int slot, Integer... pageArgs) {
         GuiItem item;
         Page page;
         if (pageArgs.length > 0) {
@@ -304,7 +307,11 @@ public class ChestWindow extends Window implements Listener {
             page = pages.get(1);
         }
         // Create the item and add it to the page if a page is provided.
-        item = new GuiItem(this, mat, name, slot);
+        ItemStack is = new ItemStack(mat);
+        ItemMeta im = is.getItemMeta();
+        im.setDisplayName(Util.Color(name));
+        is.setItemMeta(im);
+        item = new GuiItem(this, is, slot);
         item.setPage(page.getPageNr());
         page.addItem(item, slot);
         return item;
@@ -318,7 +325,7 @@ public class ChestWindow extends Window implements Listener {
      * @param pageArgs <b>[Optional]</b> page the item will be on (enable pages first!)
      * @return the created Item
      */
-    public GuiItem addItemStack(Material mat, String name, Integer... pageArgs) {
+    public GuiItem addItem(Material mat, String name, Integer... pageArgs) {
         GuiItem item;
         Page page;
         int pageNr;
@@ -344,7 +351,11 @@ public class ChestWindow extends Window implements Listener {
                 page = pages.get(1);
             }
         }
-        item = new GuiItem(this, mat, name, page.getNextFree());
+        ItemStack is = new ItemStack(mat);
+        ItemMeta im = is.getItemMeta();
+        im.setDisplayName(Util.Color(name));
+        is.setItemMeta(im);
+        item = new GuiItem(this, is, page.getNextFree());
         item.setPage(page.getPageNr());
         page.addItem(item, page.getNextFree());
         pages.replace(page.getPageNr(), pages.get(page.getPageNr()), page);
@@ -389,6 +400,22 @@ public class ChestWindow extends Window implements Listener {
             GuiItem item = clickableItems.get(is);
             inv.setItem(item.getSlot(), item.getItemStack());
         }
+    }
+
+    /**
+     * Sets a function to execute when the inventory opens
+     * @param func function to execute
+     */
+    public void setOnOpen(Consumer<InventoryOpenEvent> func) {
+        this.onOpen = func;
+    }
+
+    /**
+     * Sets a function to execute when the inventory closes
+     * @param func function to execute
+     */
+    public void setOnClose(Consumer<InventoryCloseEvent> func) {
+        this.onClose = func;
     }
 
     /*
@@ -518,7 +545,19 @@ public class ChestWindow extends Window implements Listener {
         if (!e.getPlayer().equals(p)) {
             return;
         }
+        if (!e.getInventory().equals(inv)) {
+            return;
+        }
+        onClose.accept(e);
         HandlerList.unregisterAll(this);
+    }
+
+    @EventHandler
+    protected void onInvOpen(InventoryOpenEvent e) {
+        if (!e.getInventory().equals(inv)) {
+            return;
+        }
+        onOpen.accept(e);
     }
 
     /*
@@ -556,7 +595,19 @@ public class ChestWindow extends Window implements Listener {
         return usePages ? pages.size() : -1;
     }
 
+    /**
+     *
+     * @param pageNum Number of page to be returned (Starts with 1)
+     * @return the page or null of the page doesn't exist
+     */
     public Page getPage(int pageNum) {
         return pages.size() < pageNum ? null : pages.get(pageNum);
+    }
+
+    /**
+     * @return the size of the inventory
+     */
+    public int getSize() {
+        return inv.getSize();
     }
 }

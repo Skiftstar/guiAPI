@@ -107,7 +107,13 @@ public class TradeWindow extends Window implements Listener {
             }
         }
         if (e.isRemoveFromInv()) {
-            p.getInventory().remove(is);
+            int slot = 0;
+            for (int i = 0; i < p.getInventory().getSize(); i++) {
+                if (p.getInventory().getItem(i) != null && p.getInventory().getItem(i).equals(is)) {
+                    p.getInventory().setItem(i, null);
+                    break;
+                }
+            }
             //Add to return list for later redistribution should the trade be canceled
             if (p.equals(p1)) {
                 p1Return.add(e.getItem());
@@ -472,7 +478,7 @@ public class TradeWindow extends Window implements Listener {
      */
     @Deprecated
     @Override
-    public GuiItem setItemStack(Material mat, String name, int slot, Integer... pageArgs) {
+    public GuiItem setItem(Material mat, String name, int slot, Integer... pageArgs) {
         return null;
     }
 
@@ -486,7 +492,7 @@ public class TradeWindow extends Window implements Listener {
      */
     @Deprecated
     @Override
-    public GuiItem setItemStack(ItemStack is, int slot, Integer... pageArgs) {
+    public GuiItem setItem(ItemStack is, int slot, Integer... pageArgs) {
         return null;
     }
 
@@ -631,6 +637,8 @@ public class TradeWindow extends Window implements Listener {
         // Check if its the ready button
         } else if (is.equals(borderItem)) {
             setReady((Player) e.getWhoClicked(), !ready.get((Player) e.getWhoClicked()));
+        } else if (is.equals(borderReadyItem)) {
+            setReady((Player) e.getWhoClicked(), !ready.get((Player) e.getWhoClicked()));
         }
     }
 
@@ -644,14 +652,14 @@ public class TradeWindow extends Window implements Listener {
             }
             unregister();
             p2.closeInventory();
-            giveItemsBack();
+            //giveItemsBack();
         } else if (e.getInventory().equals(invP2)) {
             if (!e.getPlayer().equals(p2)) {
                 return;
             }
             unregister();
             p1.closeInventory();
-            giveItemsBack();
+            //giveItemsBack();
         }
     }
 }

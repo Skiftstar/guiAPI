@@ -17,41 +17,17 @@ public class GuiItem {
     private int slot;
     private int page = -1;
 
-    /**
-     *
-     * @param window window of the item
-     * @param mat Material of the item
-     * @param name Name of the item
-     * @param amount Amount of items in the ItemStack
-     * @param slot slot the item will be put in
+    /*
+    Creates a GuiItem with a provided ItemStack
      */
-    GuiItem(Window window, Material mat, String name, int amount, int slot) {
-        this.window = window;
-        this.slot = slot;
-        is = new ItemStack(mat, amount);
-        ItemMeta im = is.getItemMeta();
-        im.setDisplayName(Util.Color(name));
-        is.setItemMeta(im);
-    }
-
-    /**
-     * Same as other constructor, but without name. Name will be the material name
-     */
-    GuiItem(Window window, Material mat, int amount, int slot) {
-        this.window = window;
-        this.slot = slot;
-        is = new ItemStack(mat, amount);
-        ItemMeta im = is.getItemMeta();
-    }
-
     GuiItem(Window window, ItemStack is, int slot) {
         this.is = new ItemStack(is);
         this.slot = slot;
         this.window = window;
     }
 
-    /**
-     * same as other constructor, but without item amount, amount will be 1
+    /*
+     * same as other constructor, but itemstack will be created with provided values
      */
     GuiItem(Window window, Material mat, String name, int slot) {
         this.window = window;
@@ -60,15 +36,6 @@ public class GuiItem {
         ItemMeta im = is.getItemMeta();
         im.setDisplayName(Util.Color(name));
         is.setItemMeta(im);
-    }
-
-    /**
-     * same as other constructors, but without name or amount, name will be item name, amount will be 1
-     */
-    GuiItem(ChestWindow window, Material mat, int slot) {
-        this.window = window;
-        this.slot = slot;
-        is = new ItemStack(mat);
     }
 
     /*
