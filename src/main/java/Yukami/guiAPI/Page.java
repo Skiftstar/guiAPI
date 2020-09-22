@@ -42,7 +42,13 @@ public class Page {
      * Clears the entire Page
      */
     public void clear() {
+        if (items.length == 0) {
+            return;
+        }
         for (GuiItem item : items) {
+            if (item == null) {
+                continue;
+            }
             items[item.getSlot()] = null;
             changedSlots.add(item.getSlot());
         }
