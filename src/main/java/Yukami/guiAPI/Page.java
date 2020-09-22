@@ -136,6 +136,7 @@ public class Page {
             }
         }
         items[slot] = item;
+        item.setSlot(slot);
         changedSlots.add(slot);
         window.clickableItems.put(item.getItemStack(), item);
         checkUpdate();
