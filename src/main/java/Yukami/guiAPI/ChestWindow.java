@@ -558,7 +558,9 @@ public class ChestWindow extends Window implements Listener {
         if (!e.getInventory().equals(inv)) {
             return;
         }
-        onClose.accept(e);
+        if (onClose != null) {
+            onClose.accept(e);
+        }
         HandlerList.unregisterAll(this);
     }
 
@@ -567,7 +569,9 @@ public class ChestWindow extends Window implements Listener {
         if (!e.getInventory().equals(inv)) {
             return;
         }
-        onOpen.accept(e);
+        if (onOpen != null) {
+            onOpen.accept(e);
+        }
     }
 
     /*
