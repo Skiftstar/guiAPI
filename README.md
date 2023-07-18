@@ -1,4 +1,9 @@
 # GuiAPI
+
+### Archived, [new Version see here](https://github.com/Skiftstar/GuiAPI-Redone)
+Why is it archived? Honestly because it is a complete code mess and I couldn't be bothered to clean it up. It needed a full on rewrite.
+So why make a new Repo? Just to seperate these two and to still have this massive time invenstment from back then lying around
+
 ### This API is tested for 1.15.2 ! Make sure to set your API Version in the plugin.yml !!
 ### Anvil Window might not work in other versions because of the usage of NMS !!
 An API for Minecraft Spigot that makes creating GUIs easier
